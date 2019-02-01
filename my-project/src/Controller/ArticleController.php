@@ -5,38 +5,76 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class ArticleUse extends AbstractController
+class ArticleController extends AbstractController
 {
-    public function showArticle($id = 7)
+    /**
+     * @Route("/article/showArticle/{id}")
+     */
+    public function showArticle($id)
     {
-        // vykresleni sablony
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($id);
+        
+        if (!$article) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+                );
+        }
+            
+        // vykresleni sablony s clankem dle ID
         return $this->render('article/showArticle.html.twig', [
-            'id' => $id,
+            'article' => $article,
         ]);
     }
     
     /**
-     * @Route("/article/saveArticle", name="product")
+     * @Route("/article/saveArticle")
      */
-    public function saveArticle()
+    public function saveArticle(Request $request)
     {
-        //prace s doctrinou
-        $entityManager = $this->getDoctrine()->getManager();
-        
+
+        // vytvarim novy Article
         $article = new Article();
-        $article->setName('Test name');
-        $article->setPerex('perex');
-        $article->setText('Lipsum!');
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($article);
         
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+        //vytvoreni formulare
+        $form = $this->createFormBuilder($article)
+            ->add('name', TextType::class)
+            ->add('perex', TextType::class)
+            ->add('text', TextType::class)
+            ->add('save', SubmitType::class, ['label' => 'Create Task'])
+            ->getForm();
         
-        // vykresleni sablony
+        //asi odchyd POSTu
+        $form->handleRequest($request);
+        
+        //formular odeslan
+        if ($form->isSubmitted() && $form->isValid()) {            
+            
+            $article = $form->getData();
+    
+            /*
+            $article->setName('Test name');
+            $article->setPerex('perex');
+            $article->setText('Lipsum!');
+            */
+            
+            //prace s doctrinou
+            $entityManager = $this->getDoctrine()->getManager();
+            // tell Doctrine you want to (eventually) save the Product (no queries yet)
+            $entityManager->persist($article);
+            // actually executes the queries (i.e. the INSERT query)
+            $entityManager->flush();
+        }
+            
+        // vykresleni sablony ms formularem
         return $this->render('article/saveArticle.html.twig', [
-            'id' => $article->getId(),
+            /*'id' => $article->getId(),*/
+            'form' => $form->createView(),
         ]);
     }
     
