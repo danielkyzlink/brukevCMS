@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<table>
+    <thead>
+        <tr>
+            <th scope="col">Název</th>
+            <th scope="col">Perex</th>
+            <th scope="col">Text</th>
+            <th scope="col">funkce</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+        	<tr>
+        		<td>
+                    {{ article.name }}
+            	</td>
+            	<td>
+                    {{ article.perex|slice(0, 50) ~ '...' }}
+            	</td>
+            	<td>
+                    {{ article.text|slice(0, 50) ~ '...' }}
+            	</td>
+            	<td>
+                    <a href="{{ path('showArticle', { 'id': article.id }) }}">Zobrazit</a> | <a href="#">Smazat</a>
+            	</td>
+    		</tr>
+        {% endfor %}
+    </tbody>
+</table>
+    
+{% endblock %}

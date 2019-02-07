@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/article/showArticle/{id}")
+     * @Route("/article/showArticle/{id}", name="showArticle")
      */
     public function showArticle($id)
     {
@@ -33,7 +33,27 @@ class ArticleController extends AbstractController
     }
     
     /**
-     * @Route("/article/saveArticle")
+     * @Route("/article/listArticle", name="listArticle")
+     */
+    public function listArticles()
+    {
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll();
+        
+        if (!$articles) {
+            throw $this->createNotFoundException(
+                'No product found.');
+        }
+            
+        // vykresleni sablony
+        return $this->render('article/listArticles.html.twig', [
+           'articles' => $articles, 
+        ]);
+    }
+    
+    /**
+     * @Route("/article/saveArticle", name="saveArticle")
      */
     public function saveArticle(Request $request)
     {

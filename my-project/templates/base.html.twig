@@ -2,11 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Test Application{% endblock %}</title>
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <nav>
+            {% block sidebar %}
+                <ul>
+    				<li><a href="{{ path('home') }}">Domů</a></li>
+    				<li><a href="{{ path('listArticle') }}">Zobraz články</a></li>
+        			<li><a href="{{ path('saveArticle') }}">Nový članek</a></li>
+				</ul>
+            {% endblock %}
+        </nav>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>

@@ -1,6 +1,9 @@
-{#<h1>Your lucky number is {{ id }}</h1>#}
-name: {{ article.name }}
-<br>
-perex: {{ article.perex }}
-<br>
-text: {{ article.text }}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ article.name }}</h1>
+    <p>{{ article.perex }}</p>
+    <p>{{ article.text }}</p>
+
+{% endblock %}
