@@ -8,6 +8,7 @@ use App\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ArticleController extends AbstractController
 {
@@ -54,10 +55,13 @@ class ArticleController extends AbstractController
     
     /**
      * @Route("/article/saveArticle", name="saveArticle")
+     * 
+     * Require ROLE_USER for only this controller method.
+     *
+     * @IsGranted("ROLE_USER")
      */
     public function saveArticle(Request $request)
     {
-
         // vytvarim novy Article
         $article = new Article();
         
