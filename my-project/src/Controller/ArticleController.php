@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends AbstractController
 {
@@ -31,6 +32,21 @@ class ArticleController extends AbstractController
         return $this->render('admin/article/showArticle.html.twig', [
             'article' => $article,
         ]);
+    }
+    
+    public function showPlainArticle($id)
+    {
+        $plainArticle = $this->getDoctrine()
+        ->getRepository(Article::class)
+        ->find($id);
+        
+        if (!$plainArticle) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+                );
+        }
+        // vykresleni sablony s clankem dle ID
+        return new Response($plainArticle->getText());
     }
     
     /**
