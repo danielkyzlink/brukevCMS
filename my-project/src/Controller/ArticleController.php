@@ -28,13 +28,13 @@ class ArticleController extends AbstractController
         }
             
         // vykresleni sablony s clankem dle ID
-        return $this->render('article/showArticle.html.twig', [
+        return $this->render('admin/article/showArticle.html.twig', [
             'article' => $article,
         ]);
     }
     
     /**
-     * @Route("/article/listArticle", name="listArticle")
+     * @Route("/admin/article/listArticle", name="listArticle")
      */
     public function listArticles()
     {
@@ -48,13 +48,13 @@ class ArticleController extends AbstractController
         }
             
         // vykresleni sablony
-        return $this->render('article/listArticles.html.twig', [
+        return $this->render('admin/article/listArticles.html.twig', [
            'articles' => $articles, 
         ]);
     }
     
     /**
-     * @Route("/article/saveArticle", name="saveArticle")
+     * @Route("/admin/article/saveArticle", name="saveArticle")
      * 
      * Require ROLE_USER for only this controller method.
      *
@@ -96,7 +96,7 @@ class ArticleController extends AbstractController
         }
             
         // vykresleni sablony ms formularem
-        return $this->render('article/saveArticle.html.twig', [
+        return $this->render('admin/article/saveArticle.html.twig', [
             /*'id' => $article->getId(),*/
             'form' => $form->createView(),
         ]);

@@ -9,11 +9,20 @@ use Symfony\Component\HttpFoundation\Request;
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/admin", name="home")
      */
     public function showHP()
     {
         
-        return $this->render('homepage/showHP.html.twig');
+        return $this->render('admin/homepage/showHP.html.twig');
+    }
+
+    /**
+     * @Route("/", name="FEhome")
+     */
+    public function showFrontendHP()
+    {
+        
+        return $this->render('frontend/homepage/showFE.html.twig');
     }
 }

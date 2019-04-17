@@ -1,0 +1,67 @@
+/* CSS GRID */
+html {
+	height: 100%;
+}
+
+body {
+	display: grid;
+    grid-gap: 10px;
+	grid-template-columns: 2fr 8fr;
+	grid-template-areas: "nav main";
+	margin: 0;
+	min-height: 100%;
+}
+
+nav {
+	grid-area: nav;
+}
+
+main {
+	grid-area: main;	
+}
+
+/**/
+body {
+	font-family: "Helvetica";
+	background-color:  #f7f7f9;
+}
+
+main {
+	box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+	background-color: #fff;
+	padding: 20px;
+}
+
+nav {
+	background-color: #0e0c28;
+	padding: 20px;
+	color: #7AB4DD;
+	height: 100%;
+}
+
+nav * {
+	color: #ddd;	
+}
+
+nav ul {
+	position: fixed;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #fff;
+}
+
+table tbody tr:nth-of-type(2n+1) {
+    background-color: rgba(230, 230, 242, .5);
+}
+
+table td,
+table th {
+    padding: 10px;
+    vertical-align: middle;
+    font-weight: normal;
+    text-align: left;
+}

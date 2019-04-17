@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Test Application{% endblock %}</title>
+        <link href="{{ asset('css/admin/main.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            {% block sidebar %}
+                <ul>
+    				<li><a href="{{ path('home') }}">Domů</a></li>
+    				<li><a href="{{ path('listArticle') }}">Zobraz články</a></li>
+        			<li><a href="{{ path('saveArticle') }}">Nový članek</a></li>
+        			{% if not is_granted('ROLE_USER') %}
+        				<li><a href="{{ path('app_login') }}">LOGIN</a></li>
+        			{% endif %}
+        			{% if is_granted('ROLE_USER') %}
+        				<li><a href="{{ path('app_logout') }}">LOGOUT</a></li>
+                    {% endif %}
+        			<li><a href="{{ path('app_register') }}">Registrace</a></li>
+				</ul>
+            {% endblock %}
+        </nav>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+    </body>
+</html>
