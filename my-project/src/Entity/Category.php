@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -17,6 +19,11 @@ class Category
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     */
+    private $articles;    
+    
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -30,6 +37,11 @@ class Category
      * @ORM\Column(type="integer", nullable=true)
      */
     private $rank;
+    
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,5 +82,13 @@ class Category
         $this->rank = $rank;
 
         return $this;
+    }
+    
+    /**
+     * @return Collection|Article[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->articles;
     }
 }

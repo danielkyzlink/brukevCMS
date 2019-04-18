@@ -10,6 +10,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ArticleController extends AbstractController
 {
@@ -78,14 +82,37 @@ class ArticleController extends AbstractController
      */
     public function saveArticle(Request $request)
     {
+        // nacteni kategorii
+        $categories = $this->getDoctrine()
+        ->getRepository(Category::class)
+        ->findAll();
+        //varianta ktera vraci pole (ne objekt) ---ASI SMAZAT---
+        /*$categories = $this->getDoctrine()
+        ->getRepository(Category::class)
+        ->createQueryBuilder('e')
+        ->select('e')
+        ->getQuery()
+        ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        */
+        
+        if (!$categories) {
+            throw $this->createNotFoundException(
+                'No product found.');
+        }
+        
         // vytvarim novy Article
         $article = new Article();
         
         //vytvoreni formulare
         $form = $this->createFormBuilder($article)
+            ->add('active', CheckboxType::class)
             ->add('name', TextType::class)
             ->add('perex', TextType::class)
             ->add('text', TextType::class)
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+            ])
             ->add('save', SubmitType::class, ['label' => 'Create Task'])
             ->getForm();
         
