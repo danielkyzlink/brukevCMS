@@ -1,0 +1,17 @@
+{% extends 'frontend/base.html.twig' %}
+
+
+{% block body %}
+
+{% for article in categoryList %}
+<section id="hero" class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+    <div class="hero-container">
+      <h1>{{ article.name|raw }}</h1>
+      <h2>{{ article.perex|raw }}</h2>
+      <p>
+      {{ article.text|raw }}
+      </p>
+    </div>
+  </section>
+{% endfor %}
+{% endblock %}

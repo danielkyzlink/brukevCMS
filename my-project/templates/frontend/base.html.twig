@@ -37,6 +37,19 @@
 </head>
 
 <body>
+
+  <header id="header" class="header header-hide">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <h1><a href="#body" class="scrollto">brukev<span>.cz</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+      </div>
+      {{ render(controller('App\\Controller\\CategoryController:showMenu')) }}
+    </div>
+  </header><!-- #header -->
+
 {% block body %}{% endblock %}
 </body>
 </html>

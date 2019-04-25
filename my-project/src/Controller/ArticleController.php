@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ArticleController extends AbstractController
 {
@@ -36,21 +37,6 @@ class ArticleController extends AbstractController
         return $this->render('admin/article/showArticle.html.twig', [
             'article' => $article,
         ]);
-    }
-    
-    public function showPlainArticle($id)
-    {
-        $plainArticle = $this->getDoctrine()
-        ->getRepository(Article::class)
-        ->find($id);
-        
-        if (!$plainArticle) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-                );
-        }
-        // vykresleni sablony s clankem dle ID
-        return new Response($plainArticle->getText());
     }
     
     /**
@@ -86,14 +72,6 @@ class ArticleController extends AbstractController
         $categories = $this->getDoctrine()
         ->getRepository(Category::class)
         ->findAll();
-        //varianta ktera vraci pole (ne objekt) ---ASI SMAZAT---
-        /*$categories = $this->getDoctrine()
-        ->getRepository(Category::class)
-        ->createQueryBuilder('e')
-        ->select('e')
-        ->getQuery()
-        ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-        */
         
         if (!$categories) {
             throw $this->createNotFoundException(
@@ -108,7 +86,9 @@ class ArticleController extends AbstractController
             ->add('active', CheckboxType::class)
             ->add('name', TextType::class)
             ->add('perex', TextType::class)
-            ->add('text', TextType::class)
+            ->add('text', TextareaType::class, [
+                'attr' => ['class' => 'tinymce'],                
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',

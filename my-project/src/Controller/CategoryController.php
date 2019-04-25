@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Request;
+use App\Model\ArticleModel;
 
 class CategoryController extends AbstractController
 {
@@ -27,5 +28,15 @@ class CategoryController extends AbstractController
         ]);
     }
     
+    /**
+     * @Route("/category/{slug}", name="category")
+     */
+    public function showCategory(ArticleModel $am, $slug)
+    {
+        $data = $am->showArticleByCategory($slug);
+        return $this->render('frontend/category/categoryList.html.twig', [
+            'categoryList' => $data
+        ]);
+    }    
    
 }

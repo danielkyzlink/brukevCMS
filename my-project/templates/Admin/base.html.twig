@@ -4,6 +4,26 @@
         <meta charset="UTF-8">
         <title>{% block title %}Test Application{% endblock %}</title>
         <link href="{{ asset('css/admin/main.css') }}" rel="stylesheet">
+        <script src="{{ asset('lib/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+          <script>
+  			tinymce.init({
+  			  selector: '.tinymce',
+  			  height: 500,
+  			  menubar: false,
+  			  plugins: [
+  			    'advlist autolink lists link image charmap print preview anchor textcolor',
+  			    'searchreplace visualblocks code fullscreen',
+  			    'insertdatetime media table paste code help wordcount image imagetools code'
+  			  ],
+  			  toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | link image code',
+  			  content_css: [
+  			    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+  			    '//www.tiny.cloud/css/codepen.min.css'
+  			  ],
+  			  images_upload_url: 'FileUploadModel.php',
+  			});
+  		</script>
+  		
     </head>
     <body>
         <nav>

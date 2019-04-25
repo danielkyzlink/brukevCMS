@@ -3,24 +3,9 @@
 
 {% block body %}
 
-
-
-  <header id="header" class="header header-hide">
-    <div class="container">
-
-      <div id="logo" class="pull-left">
-        <h1><a href="#body" class="scrollto">test<span>.cz</span></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
-      </div>
-      {{ render(controller('App\\Controller\\CategoryController:showMenu')) }}
-    </div>
-  </header><!-- #header -->
-
-
-    {% for i in [14,15,16,17,18,20,21,22,23,24,25] %}
-        {{ render(controller('App\\Controller\\ArticleController:showPlainArticle', { 'id': i })) }}
-    {% endfor %}
+{% for article in categoryList %}
+        {{ article.text|raw }}
+{% endfor %}
 	
 
 
