@@ -15,6 +15,7 @@ use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use App\Model\FileUploadModel;
 
 class ArticleController extends AbstractController
 {
@@ -68,6 +69,7 @@ class ArticleController extends AbstractController
      */
     public function saveArticle(Request $request)
     {
+        
         // nacteni kategorii
         $categories = $this->getDoctrine()
         ->getRepository(Category::class)
@@ -103,13 +105,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {            
             
             $article = $form->getData();
-    
-            /*
-            $article->setName('Test name');
-            $article->setPerex('perex');
-            $article->setText('Lipsum!');
-            */
-            
+                
             //prace s doctrinou
             $entityManager = $this->getDoctrine()->getManager();
             // tell Doctrine you want to (eventually) save the Product (no queries yet)
@@ -120,9 +116,29 @@ class ArticleController extends AbstractController
             
         // vykresleni sablony ms formularem
         return $this->render('admin/article/saveArticle.html.twig', [
-            /*'id' => $article->getId(),*/
             'form' => $form->createView(),
         ]);
+    }
+    
+    /**
+     * @Route("/admin/article/fileUpload", name="fileUpload", methods={"POST"})
+     *
+     * Require ROLE_USER for only this controller method.
+     *
+     * @IsGranted("ROLE_USER")
+     */
+    public function FileUpload(Request $request, FileUploadModel $fileUpload)
+    {
+        $images = $request->files->all();
+        $imageName = $fileUpload->saveImage($images);
+        
+        $publicPath = $this->getParameter('kernel.project_dir') . '/public/uploads/img/';
+        $finalImgPath = $publicPath . $imageName;
+
+        $response = new Response(json_encode(array('location' => $finalImgPath)));
+        $response->headers->set('Content-Type', 'application/json');
+        
+        return $response;
     }
     
 }
