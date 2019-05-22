@@ -15,6 +15,7 @@ use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Model\FileUploadModel;
 
 class ArticleController extends AbstractController
@@ -132,7 +133,7 @@ class ArticleController extends AbstractController
         $images = $request->files->all();
         $imageName = $fileUpload->saveImage($images);
         
-        $publicPath = $this->getParameter('kernel.project_dir') . '/public/uploads/img/';
+        $publicPath = '/uploads/img/';
         $finalImgPath = $publicPath . $imageName;
 
         $response = new Response(json_encode(array('location' => $finalImgPath)));

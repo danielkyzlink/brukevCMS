@@ -2,7 +2,9 @@
         <ul class="nav-menu">
         
           {% for value in category %}
-          <li><a href="{{ path('category', {'slug': value.id}) }}">{{ value.name }}</a></li>
+	          {% if value.id != 1 %} {# TODO: toto by se mìlo rešit spíš v modelu #}
+    	      	<li><a href="{{ path('category', {'slug': value.id}) }}">{{ value.name }}</a></li>
+    	      {% endif %}
           {% endfor %}
         
           {#
