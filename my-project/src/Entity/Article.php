@@ -30,6 +30,11 @@ class Article
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $picture;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -40,6 +45,11 @@ class Article
      * @ORM\Column(type="text", nullable=true)
      */
     private $text;
+    
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateOfCreated;
 
     public function getId(): ?int
     {
@@ -69,6 +79,18 @@ class Article
 
         return $this;
     }
+    
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+    
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
+        
+        return $this;
+    }
 
     public function getPerex(): ?string
     {
@@ -91,6 +113,18 @@ class Article
     {
         $this->text = $text;
 
+        return $this;
+    }
+    
+    public function getDateOfCreated(): ?object
+    {
+        return $this->dateOfCreated;
+    }
+    
+    public function setDateOfCreated(?object $dateOfCreated): self
+    {
+        $this->dateOfCreated = $dateOfCreated;
+        
         return $this;
     }
     

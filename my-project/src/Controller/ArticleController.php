@@ -68,7 +68,7 @@ class ArticleController extends AbstractController
      *
      * @IsGranted("ROLE_USER")
      */
-    public function saveArticle(Request $request)
+    public function saveArticle(Request $request, FileUploadModel $fileUpload)
     {
         
         // nacteni kategorii
@@ -78,7 +78,7 @@ class ArticleController extends AbstractController
         
         if (!$categories) {
             throw $this->createNotFoundException(
-                'No product found.');
+                'No categories found.');
         }
         
         // vytvarim novy Article
@@ -89,6 +89,7 @@ class ArticleController extends AbstractController
             ->add('active', CheckboxType::class)
             ->add('name', TextType::class)
             ->add('perex', TextType::class)
+            ->add('picture', FileType::class)
             ->add('text', TextareaType::class, [
                 'attr' => ['class' => 'tinymce'],                
             ])
@@ -103,14 +104,28 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
         
         //formular odeslan
-        if ($form->isSubmitted() && $form->isValid()) {            
+        if ($form->isSubmitted() && $form->isValid()) {
             
             $article = $form->getData();
-                
+            
             //prace s doctrinou
             $entityManager = $this->getDoctrine()->getManager();
             // tell Doctrine you want to (eventually) save the Product (no queries yet)
             $entityManager->persist($article);
+
+            
+            //uložení obrázku
+            $picture = $form['picture']->getData();
+            if ($picture){
+                $pictureName = $fileUpload->saveImage($picture, "MASTER");
+                
+                //nastaveni jmena obrazku
+                $article->setPicture($pictureName);
+            }
+            
+            //set date
+            $article->setDateOfCreated(new \DateTime());
+                        
             // actually executes the queries (i.e. the INSERT query)
             $entityManager->flush();
         }
@@ -128,7 +143,7 @@ class ArticleController extends AbstractController
      *
      * @IsGranted("ROLE_USER")
      */
-    public function FileUpload(Request $request, FileUploadModel $fileUpload)
+    public function fileUpload(Request $request, FileUploadModel $fileUpload)
     {
         $images = $request->files->all();
         $imageName = $fileUpload->saveImage($images);
