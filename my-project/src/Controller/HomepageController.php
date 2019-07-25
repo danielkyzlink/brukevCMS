@@ -10,15 +10,6 @@ use App\Model\ArticleModel;
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/admin", name="home")
-     */
-    public function showHP()
-    {
-        
-        return $this->render('admin/homepage/showHP.html.twig');
-    }
-
-    /**
      * @Route("/", name="FEhome")
      */
     public function showFrontendHP(ArticleModel $am)

@@ -24,6 +24,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # controllers for admin
+    App\AdminController\:
+        resource: '../src/AdminController'
+        tags: ['controller.service_arguments']
+
     #moje nove
     App\Model\:
         resource: '../src/Model'
