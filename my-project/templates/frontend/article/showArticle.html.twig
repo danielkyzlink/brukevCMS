@@ -1,14 +1,25 @@
 {% extends 'frontend/base.html.twig' %}
 
 {% block body %}
-<section id="hero" class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+<div class="container">
+  <section class="article">
     <div class="hero-container">
-      <h1>{{ article.name|raw }}</h1>
-      <p><img src="../../uploads/img/master/{{ article.picture }}"></p>
-      <h2>{{ article.perex|raw }}</h2>
-      <p>
-      {{ article.text|raw }}
-      </p>
+      <div class="article-header">
+          <div class="article-name-perex">
+          	<h1>{{ article.name|raw }}</h1>
+          	<h2>{{ article.perex|raw }}</h2>
+          </div>
+          <div class="master-image">
+          	<img src="../../uploads/img/master/{{ article.picture }}">
+          </div>
+      </div>
+      <div class="article-text">
+        {{ article.text|raw }}
+      </div>
+    </div>
+    <div class="date-of-created">
+    {{ article.dateOfCreated|date('d. m. Y') }}
     </div>
   </section>
+</div>
 {% endblock %}

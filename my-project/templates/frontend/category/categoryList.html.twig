@@ -3,17 +3,23 @@
 
 {% block body %}
 
+<div class="container">
+<div class="row">
+
 {% for article in categoryList %}
-<section id="hero" class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-    <div class="hero-container">
-      <h1>{{ article.name|raw }}</h1>
-      <a href="{{ path('showArticleDetail', { 'id': article.id }) }}">Zobrazit detail článku</a>
-      <p><img src="../../uploads/img/master/{{ article.picture }}"></p>
-      <h2>{{ article.perex|raw }}</h2>
-      <p>
-      {{ article.text|raw }}
-      </p>
+<div class="col-md-6 col-lg-4">
+  <a href="{{ path('showArticleDetail', { 'id': article.id }) }}">
+    <div class="feature-block">
+      <img src="../../uploads/img/master/{{ article.picture }}" alt="img" class="img-fluid">
+      <h4>{{ article.name|raw }}</h>
+      <p>{{ article.perex|raw }}</p>
     </div>
-  </section>
+  </a>
+</div>
 {% endfor %}
+
+</div>
+</div>
+
 {% endblock %}
+

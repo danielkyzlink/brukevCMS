@@ -11,6 +11,7 @@
 body {
   background-color: #fff;
   color: #333;
+  padding-top: 70px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -42,6 +43,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 ul {
   letter-spacing: 1px;
 }
@@ -52,12 +57,12 @@ li {
   font-weight: 400;
   letter-spacing: 2px;
   line-height: 30px;
-  text-transform: capitalize;
 }
 
 p {
-  color: #505050;
-  font-size: 14px;
+  color: #000;
+  font-family: "Open Sans", Arial;
+  font-size: 15px;
   font-weight: 300;
   letter-spacing: 0.5px;
   line-height: 2;
@@ -138,7 +143,7 @@ span {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: #fff;
+  background: #F8F8F8;
   position: fixed;
   left: 0;
   top: 0;
@@ -150,6 +155,7 @@ span {
 
 #header #logo {
   padding: 6px 0 0 0;
+  float: left;
 }
 
 #header #logo h1 {
@@ -159,6 +165,7 @@ span {
   font-weight: 500;
   letter-spacing: 1px;
   margin: 0;
+  line-height: unset;
 }
 
 #header #logo h1 a {
@@ -187,11 +194,8 @@ span {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: calc(100vh - 40px);
   background: url(/img/hero-bg.png) center bottom no-repeat;
   background-size: 100%;
-  position: relative;
-  margin-top: 40px;
 }
 
 @media (min-width: 1025px) {
@@ -201,11 +205,6 @@ span {
 }
 
 #hero .hero-container {
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -213,7 +212,11 @@ span {
   text-align: center;
 }
 
-#hero h1 {
+#hero .hero-container-100vh {
+  height: 100vh;
+}
+
+h1 {
   margin: 0 0 10px 0;
   font-size: 48px;
   font-weight: 700;
@@ -223,13 +226,13 @@ span {
 }
 
 @media (max-width: 768px) {
-  #hero h1 {
+  h1 {
     font-size: 28px;
     line-height: 36px;
   }
 }
 
-#hero h2 {
+h2 {
   color: #777;
   margin-bottom: 30px;
   font-size: 20px;
@@ -238,7 +241,7 @@ span {
 }
 
 @media (max-width: 768px) {
-  #hero h2 {
+  h2 {
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 30px;
@@ -290,6 +293,36 @@ span {
 
 #hero .btns a:hover {
   color: #71c55d;
+}
+
+/*-------------------------------------------------------------
+# ARTICLE
+----------------------------------------------------------------*/
+section.article .article-header {
+
+}
+
+section.article .master-image {
+  float: right;
+}
+
+section.article .master-image img {
+  max-width: 355px;
+  max-height: 355px;
+}
+
+section.article .article-name-perex {
+  float: left;
+}
+
+section.article .article-text {
+  clear: both;
+  padding-top: 20px;
+}
+
+section.article .date-of-created {
+  text-align: right;
+  width: 100%;
 }
 
 /*--------------------------------------------------------------
@@ -582,32 +615,33 @@ body.mobile-nav-active #mobile-nav-toggle i {
   width: 100%;
 }
 
-#get-started .feature-block {
+.feature-block {
   background: #fff none repeat scroll 0 0;
   padding: 30px 20px;
   transition: all 0.5s ease-in-out 0s;
 }
 
 @media (max-width: 991px) {
-  #get-started .feature-block {
+  .feature-block {
     margin-bottom: 30px;
   }
 }
 
-#get-started .feature-block:hover {
+.feature-block:hover {
   box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease-in-out 0s;
 }
 
-#get-started .feature-block h4 {
+.feature-block h4 {
   margin-bottom: 20px;
 }
 
-#get-started .feature-block p {
+.feature-block p {
   margin-bottom: 20px;
 }
 
-#get-started .feature-block a {
+.feature-block a,
+.feature-block span {
   color: #505050;
   font-size: 12px;
   font-weight: 600;
@@ -616,7 +650,11 @@ body.mobile-nav-active #mobile-nav-toggle i {
   transition: 0.3s;
 }
 
-#get-started .feature-block a:hover {
+.feature-block:hover span {
+  color: #71c55d;
+}
+
+.feature-block a:hover {
   color: #71c55d;
 }
 
