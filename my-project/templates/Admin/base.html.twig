@@ -5,11 +5,12 @@
         <title>{% block title %}Test Application{% endblock %}</title>
         <link href="{{ asset('css/admin/main.css') }}" rel="stylesheet">
         <script src="{{ asset('lib/tinymce/js/tinymce/tinymce.min.js') }}"></script>
-          <script>
+        <script>
   			tinymce.init({
   			  selector: '.tinymce',
   			  height: 500,
   			  menubar: false,
+  			  entity_encoding : "raw",
   			  plugins: [
   			    'advlist autolink lists link image charmap print preview anchor textcolor',
   			    'searchreplace visualblocks code fullscreen',
@@ -21,6 +22,11 @@
   			    '//www.tiny.cloud/css/codepen.min.css'
   			  ],
   			  images_upload_url: '{{ path('fileUpload') }}',
+			  setup: function (editor) {
+  				editor.on('change', function () {
+  				  editor.save();
+  				});
+  			  }
   			});
   		</script>
   		

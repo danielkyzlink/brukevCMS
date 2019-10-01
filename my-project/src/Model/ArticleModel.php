@@ -17,7 +17,8 @@ class ArticleModel
         $articles = $this->em
         ->getRepository(Article::class)
         ->findBy(
-            array('category' =>  $categoryId)
+            array('category' =>  $categoryId),
+            array('dateOfCreated' => 'DESC')
         );
              
         if (!$articles) {
