@@ -17,30 +17,10 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Model\FileUploadModel;
+use App\Model\ArticleModel;
 
 class ArticleController extends AbstractController
 {
-    /**
-     * @Route("/admin/article/showArticle/{id}", name="showArticle")
-     */
-    public function showArticle($id)
-    {
-        $article = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->find($id);
-        
-        if (!$article) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-                );
-        }
-            
-        // vykresleni sablony s clankem dle ID
-        return $this->render('admin/article/showArticle.html.twig', [
-            'article' => $article,
-        ]);
-    }
-    
     /**
      * @Route("/admin/article/listArticle", name="listArticle")
      */
@@ -68,19 +48,8 @@ class ArticleController extends AbstractController
      *
      * @IsGranted("ROLE_USER")
      */
-    public function saveArticle(Request $request, FileUploadModel $fileUpload)
-    {
-        
-        // nacteni kategorii
-        $categories = $this->getDoctrine()
-        ->getRepository(Category::class)
-        ->findAll();
-        
-        if (!$categories) {
-            throw $this->createNotFoundException(
-                'No categories found.');
-        }
-        
+    public function saveArticle(Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload)
+    {        
         // vytvarim novy Article
         $article = new Article();
         
@@ -107,30 +76,13 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $article = $form->getData();
-            
-            //prace s doctrinou
-            $entityManager = $this->getDoctrine()->getManager();
-            // tell Doctrine you want to (eventually) save the Product (no queries yet)
-            $entityManager->persist($article);
-
-            
-            //uložení obrázku
             $picture = $form['picture']->getData();
-            if ($picture){
-                $pictureName = $fileUpload->saveImage($picture, "MASTER");
-                
-                //nastaveni jmena obrazku
-                $article->setPicture($pictureName);
-            }
             
-            //set date
-            $article->setDateOfCreated(new \DateTime());
-                        
-            // actually executes the queries (i.e. the INSERT query)
-            $entityManager->flush();
+            $articleModel->saveArticle($article, $picture, $fileUpload);
+
         }
             
-        // vykresleni sablony ms formularem
+        // vykresleni sablony s formularem
         return $this->render('admin/article/saveArticle.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -155,6 +107,5 @@ class ArticleController extends AbstractController
         $response->headers->set('Content-Type', 'application/json');
         
         return $response;
-    }
-    
+    }    
 }

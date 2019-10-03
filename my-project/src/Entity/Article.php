@@ -50,6 +50,11 @@ class Article
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateOfCreated;
+    
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $seoTitle;
 
     public function getId(): ?int
     {
@@ -124,6 +129,18 @@ class Article
     public function setDateOfCreated(?object $dateOfCreated): self
     {
         $this->dateOfCreated = $dateOfCreated;
+        
+        return $this;
+    }
+    
+    public function getSeoTitle(): string
+    {
+        return $this->seoTitle;
+    }
+    
+    public function setSeoTitle(string $seoTitle): self
+    {
+        $this->seoTitle = $seoTitle;
         
         return $this;
     }

@@ -8,7 +8,7 @@
 
 {% for article in categoryList %}
 <div class="col-md-6 col-lg-4">
-  <a href="{{ path('showArticleDetail', { 'id': article.id }) }}">
+  <a href="{{ path('showArticleDetail', { 'seoTitle': article.seoTitle }) }}">
     <div class="feature-block">
       <img src="../../uploads/img/master/{{ article.picture }}" alt="img" class="img-fluid">
       <h4>{{ article.name|raw }}</h>

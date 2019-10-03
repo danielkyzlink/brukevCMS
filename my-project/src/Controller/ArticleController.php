@@ -21,17 +21,17 @@ use App\Model\FileUploadModel;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/showArticle/{id}", name="showArticleDetail")
+     * @Route("/showArticle/{seoTitle}", name="showArticleDetail")
      */
-    public function showArticle($id)
+    public function showArticle($seoTitle)
     {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->find($id);
+            ->findOneBy(array('seoTitle' => $seoTitle));
         
         if (!$article) {
             throw $this->createNotFoundException(
-                'No product found for id '.$id
+                'No product found for id '.$seoTitle
                 );
         }
             
