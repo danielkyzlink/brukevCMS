@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Model\FileUploadModel;
 use App\Model\ArticleModel;
+use PhpParser\Node\Stmt\Label;
 
 class ArticleController extends AbstractController
 {
@@ -40,34 +41,47 @@ class ArticleController extends AbstractController
            'articles' => $articles, 
         ]);
     }
-    
+
     /**
-     * @Route("/admin/article/saveArticle", name="saveArticle")
+     * @Route("/admin/article/saveArticle/{articleId}", requirements={"articleId"="\d+"}, name="saveArticle")
      * 
      * Require ROLE_USER for only this controller method.
      *
      * @IsGranted("ROLE_USER")
      */
-    public function saveArticle(Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload)
-    {        
-        // vytvarim novy Article
-        $article = new Article();
+    public function saveArticle(int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload)
+    {   
+        // TODO mela by se vyresit kontrola existence articlu s danym ID
+        
+        // vytvarim novy Article nebo nacitam stavajici podle $articleId z URL
+        if($articleId){
+            $article = $articleModel->showArticleById($articleId);
+        }else{
+            $article = new Article();
+        };
         
         //vytvoreni formulare
         $form = $this->createFormBuilder($article)
             ->add('active', CheckboxType::class)
             ->add('name', TextType::class)
-            ->add('perex', TextType::class)
-            ->add('picture', FileType::class)
-            ->add('text', TextareaType::class, [
+            ->add('perex', TextType::class);
+        
+            if($articleId){
+                $form->add('picture', FileType::class, array('mapped' => false, 'required' => false, 'help' => $article->getPicture()));
+            }else{
+                $form->add('picture', FileType::class);
+            };
+            
+            
+            $form->add('text', TextareaType::class, [
                 'attr' => ['class' => 'tinymce'],                
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
             ])
-            ->add('save', SubmitType::class, ['label' => 'Create Task'])
-            ->getForm();
+            ->add('save', SubmitType::class, ['label' => 'Create Task']);
+            $form = $form->getForm($form);
         
         //asi odchyd POSTu
         $form->handleRequest($request);

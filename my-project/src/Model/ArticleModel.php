@@ -24,7 +24,18 @@ class ArticleModel
         return $articles;
     }
     
-    public function saveArticle(object $article, object $picture, FileUploadModel $fileUpload) {        
+    public function showArticleById($articleId) {
+        /*$article = $this->em
+        ->getRepository(Article::class)
+        ->find($articleId);*/
+        
+        /*TODO zjistit rozdil mezi timto zapisem a vyse zakomentovanym*/
+        $article = $this->em->getReference(Article::class, $articleId);
+        
+        return $article;
+    }
+    
+    public function saveArticle(object $article, object $picture = null, FileUploadModel $fileUpload) {        
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $this->em->persist($article);
         
@@ -41,9 +52,7 @@ class ArticleModel
         //set seoTitle
         $article->setSeoTitle($this->createSeoTitle($article->getName()));
         
-        // actually executes the queries (i.e. the INSERT query)
-        $this->em->flush();
-        
+        $this->em->flush();        
         
     }
     
@@ -56,7 +65,7 @@ class ArticleModel
         }
         
         $seoTitle = $nameOfArticle . $append;
-        setlocale(LC_CTYPE, 'cs_CZ'); //nastaveni iconv
+        /*setlocale(LC_CTYPE, 'cs_CZ'); //nastaveni iconv - nejak to zlobilo tak oddelavam*/
         $seoTitle = iconv("UTF-8", "ASCII//TRANSLIT", $seoTitle);
         $seoTitle = str_replace(" ", "-", $seoTitle);
         

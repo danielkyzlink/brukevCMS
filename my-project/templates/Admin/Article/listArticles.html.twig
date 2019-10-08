@@ -24,7 +24,7 @@
                     {{ article.text|slice(0, 50) ~ '...' }}
             	</td>
             	<td>
-                    <a href="{{ path('showArticleDetail', { 'seoTitle': article.seoTitle }) }}">Zobrazit  na webu</a> | <a href="#">Smazat</a>
+                    <a href="{{ path('saveArticle', { 'articleId': article.id }) }}">Editovat</a> | <a href="{{ path('showArticleDetail', { 'seoTitle': article.seoTitle }) }}">Zobrazit  na webu</a> | <a href="#">Smazat</a>
             	</td>
     		</tr>
         {% endfor %}
