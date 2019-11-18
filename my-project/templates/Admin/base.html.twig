@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Test Application{% endblock %}</title>
         <link href="{{ asset('css/admin/main.css') }}" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
         <script src="{{ asset('lib/tinymce/js/tinymce/tinymce.min.js') }}"></script>
         <script>
   			tinymce.init({
@@ -35,16 +36,21 @@
         <nav>
             {% block sidebar %}
                 <ul>
-    				<li><a href="{{ path('home') }}">Domů</a></li>
-    				<li><a href="{{ path('listArticle') }}">Zobraz články</a></li>
-        			<li><a href="{{ path('saveArticle') }}">Nový članek</a></li>
+    				<li><i class="fas fa-igloo"></i><a href="{{ path('home') }}">Domů</a></li>
+    			</ul>
+    			<ul>
+    				<li><i class="far fa-file-alt"></i><a href="{{ path('listArticle') }}">Zobraz články</a></li>
+    				<li><i class="far fa-trash-alt"></i><a href="{{ path('listTrash') }}">Koš</a></li>
+        			<li><i class="far fa-file"></i><a href="{{ path('saveArticle') }}">Nový članek</a></li>
+        		</ul>
+    			<ul>
         			{% if not is_granted('ROLE_USER') %}
-        				<li><a href="{{ path('app_login') }}">LOGIN</a></li>
+        				<li><i class="fas fa-sign-in-alt"></i><a href="{{ path('app_login') }}">LOGIN</a></li>
         			{% endif %}
         			{% if is_granted('ROLE_USER') %}
-        				<li><a href="{{ path('app_logout') }}">LOGOUT</a></li>
+        				<li><i class="fas fa-sign-out-alt"></i><a href="{{ path('app_logout') }}">LOGOUT</a></li>
                     {% endif %}
-        			<li><a href="{{ path('app_register') }}">Registrace</a></li>
+        			<li><i class="far fa-address-card"></i><a href="{{ path('app_register') }}">Registrace</a></li>
 				</ul>
             {% endblock %}
         </nav>

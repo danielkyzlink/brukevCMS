@@ -43,8 +43,18 @@ nav * {
 	color: #ddd;	
 }
 
-nav ul {
-	position: fixed;
+nav li {
+	list-style: none;
+	margin-bottom: 3px;
+}
+
+nav li a {
+	text-decoration: none;
+}
+
+nav li i {
+	width: 30px;
+	text-align: center;
 }
 
 table {

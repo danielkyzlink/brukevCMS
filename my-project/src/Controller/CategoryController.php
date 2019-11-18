@@ -29,7 +29,7 @@ class CategoryController extends AbstractController
     }
     
     /**
-     * @Route("/category/{slug}", name="category")
+     * @Route("/kategorie/{slug}", name="category")
      */
     public function showCategory(ArticleModel $am, $slug)
     {

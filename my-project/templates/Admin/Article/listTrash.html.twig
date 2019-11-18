@@ -8,7 +8,6 @@
             <th scope="col">Název</th>
             <th scope="col">Perex</th>
             <th scope="col">akce</th>
-            <th scope="col">zveřejněno</th>
         </tr>
     </thead>
     <tbody>
@@ -21,14 +20,7 @@
                     {{ article.perex|slice(0, 50) ~ '...' }}
             	</td>
             	<td>
-                    <a href="{{ path('saveArticle', { 'articleId': article.id }) }}">Editovat</a> | <a href="{{ path('showArticleDetail', { 'seoTitle': article.seoTitle }) }}">Zobrazit  na webu</a> | <a href="{{ path('articleToTrash', { 'articleId': article.id }) }}">Smazat</a>
-            	</td>
-            	<td>
-                    {% if article.state == 1 %}
-                    	<i class="fas fa-check"></i>
-                    {% else %}
-                    	<i class="fas fa-minus"></i>
-                    {% endif %}
+                    <a href="{{ path('articleSetKoncept', { 'articleId': article.id }) }}">Obnovit do stavu koncept</a>
             	</td>
     		</tr>
         {% endfor %}

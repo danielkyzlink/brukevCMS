@@ -21,13 +21,24 @@ use App\Model\FileUploadModel;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/showArticle/{seoTitle}", name="showArticleDetail")
+     * @Route("/clanek/{seoTitle}", name="showArticleDetail")
      */
     public function showArticle($seoTitle)
     {
+        
+        /* zobraz koncept jen prihlasenym */
+        if($this->isGranted('ROLE_USER')){
+            $statesArray = array(1, 2);
+        }else{
+            $statesArray  = array(1);
+        }
+        
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findOneBy(array('seoTitle' => $seoTitle));
+            ->findOneBy(array(
+                'seoTitle' => $seoTitle,
+                'state' => $statesArray,
+            ));
         
         if (!$article) {
             throw $this->createNotFoundException(

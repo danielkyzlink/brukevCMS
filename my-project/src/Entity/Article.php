@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
+    const STATE_SMAZANO = 0;
+    const STATE_PUBLIKOVANO = 1;
+    const STATE_REVIZE = 2;
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -56,6 +60,17 @@ class Article
      */
     private $seoTitle;
 
+    /**
+     * @ORM\Column(type="integer")
+     *
+     */
+    private $state;
+    
+    public function __construct()
+    {
+        $this->setState(self::STATE_REVIZE);
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -141,6 +156,18 @@ class Article
     public function setSeoTitle(string $seoTitle): self
     {
         $this->seoTitle = $seoTitle;
+        
+        return $this;
+    }
+    
+    public function getState(): int
+    {
+        return $this->state;
+    }
+    
+    public function setState(int $state): self
+    {
+        $this->state = $state;
         
         return $this;
     }

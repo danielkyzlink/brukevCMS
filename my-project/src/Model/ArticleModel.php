@@ -17,7 +17,10 @@ class ArticleModel
         $articles = $this->em
         ->getRepository(Article::class)
         ->findBy(
-            array('category' =>  $categoryId),
+            array(
+                'category' => $categoryId,
+                'state' => 1,                
+            ),
             array('dateOfCreated' => 'DESC')
         );
         
@@ -35,7 +38,29 @@ class ArticleModel
         return $article;
     }
     
-    public function saveArticle(object $article, object $picture = null, FileUploadModel $fileUpload) {        
+    public function articleByIdToTrash($articleId) {
+        /** @var $article Article */
+        $article = $this->em->getRepository(Article::class)
+        ->find($articleId);
+        
+        $this->em->persist($article);
+        $article->setState(0);
+        
+        $this->em->flush();
+    }
+    
+    public function articleByIdToKoncept($articleId) {
+        /** @var $article Article */
+        $article = $this->em->getRepository(Article::class)
+        ->find($articleId);
+        
+        $this->em->persist($article);
+        $article->setState(2);
+        
+        $this->em->flush();
+    }
+
+    public function saveArticle(Article $article, object $picture = null, FileUploadModel $fileUpload) {
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $this->em->persist($article);
         
@@ -48,11 +73,11 @@ class ArticleModel
         
         //set date
         $article->setDateOfCreated(new \DateTime());
-        
+                
         //set seoTitle
         $article->setSeoTitle($this->createSeoTitle($article->getName()));
-        
-        $this->em->flush();        
+                
+        $this->em->flush();
         
     }
     

@@ -29,7 +29,9 @@ class ArticleController extends AbstractController
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
-            ->findAll();
+            ->findBy(array(
+                'state' => array(1,2),
+            ));
         
         if (!$articles) {
             throw $this->createNotFoundException(
@@ -42,6 +44,46 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/article/listTrash", name="listTrash")
+     */
+    public function listTrash()
+    {
+        $articles = $this->getDoctrine()
+        ->getRepository(Article::class)
+        ->findBy(array(
+            'state' => 0,
+        ));
+        
+        if (!$articles) {
+            throw $this->createNotFoundException(
+                'No product found.');
+        }
+        
+        // vykresleni sablony
+        return $this->render('admin/article/listTrash.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+    
+    /**
+     * @Route("/admin/article/articleToTrash/{articleId}", name="articleToTrash")
+     */
+    public function articleToTrash(int $articleId, ArticleModel $articleModel, Request $request)
+    {
+        $articleModel->articleByIdToTrash($articleId);
+        return $this->redirectToRoute('listArticle');
+    }
+    
+    /**
+     * @Route("/admin/article/articleSetKoncept/{articleId}", name="articleSetKoncept")
+     */
+    public function articleToKoncept(int $articleId, ArticleModel $articleModel, Request $request)
+    {
+        $articleModel->articleByIdToKoncept($articleId);
+        return $this->redirectToRoute('listTrash');
+    }
+    
     /**
      * @Route("/admin/article/saveArticle/{articleId}", requirements={"articleId"="\d+"}, name="saveArticle")
      * 
@@ -63,6 +105,12 @@ class ArticleController extends AbstractController
         //vytvoreni formulare
         $form = $this->createFormBuilder($article)
             ->add('active', CheckboxType::class)
+            ->add('state', ChoiceType::class, [
+                'choices' => [
+                    'Publikovat' => 1,
+                    'K revizi' => 2,
+                ],
+            ])
             ->add('name', TextType::class)
             ->add('perex', TextType::class);
         
