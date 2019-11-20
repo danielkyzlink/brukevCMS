@@ -69,6 +69,7 @@ class Article
     public function __construct()
     {
         $this->setState(self::STATE_REVIZE);
+        $this->setSeoTitle("");
     }
     
     public function getId(): ?int

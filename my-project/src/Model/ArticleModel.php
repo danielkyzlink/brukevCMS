@@ -73,9 +73,11 @@ class ArticleModel
         
         //set date
         $article->setDateOfCreated(new \DateTime());
-                
+
         //set seoTitle
-        $article->setSeoTitle($this->createSeoTitle($article->getName()));
+        if(!$article->getSeoTitle()){
+            $article->setSeoTitle($this->createSeoTitle($article->getName()));
+        }
                 
         $this->em->flush();
         
