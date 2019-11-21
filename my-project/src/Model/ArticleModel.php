@@ -3,6 +3,7 @@ namespace App\Model;
 
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Category;
 
 
 class ArticleModel
@@ -13,7 +14,14 @@ class ArticleModel
         $this->em = $entityManager;
     }
     
-    public function showArticleByCategory($categoryId) {
+    public function showArticleByCategory($seoTitle) {
+        $categoryId = $this->em
+        ->getRepository(Category::class)
+        ->findOneBy(array(
+                'seoTitle' => $seoTitle,
+            )
+        );
+        
         $articles = $this->em
         ->getRepository(Article::class)
         ->findBy(

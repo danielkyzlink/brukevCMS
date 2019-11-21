@@ -29,11 +29,11 @@ class CategoryController extends AbstractController
     }
     
     /**
-     * @Route("/kategorie/{slug}", name="category")
+     * @Route("/kategorie/{seoTitle}", name="category")
      */
-    public function showCategory(ArticleModel $am, $slug)
+    public function showCategory(ArticleModel $am, $seoTitle)
     {
-        $data = $am->showArticleByCategory($slug);
+        $data = $am->showArticleByCategory($seoTitle);
         return $this->render('frontend/category/categoryList.html.twig', [
             'categoryList' => $data
         ]);

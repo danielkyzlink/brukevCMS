@@ -38,6 +38,11 @@ class Category
      */
     private $rank;
     
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $seoTitle;
+    
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -81,6 +86,18 @@ class Category
     {
         $this->rank = $rank;
 
+        return $this;
+    }
+    
+    public function getSeoTitle(): string
+    {
+        return $this->seoTitle;
+    }
+    
+    public function setSeoTitle(string $seoTitle): self
+    {
+        $this->seoTitle = $seoTitle;
+        
         return $this;
     }
     

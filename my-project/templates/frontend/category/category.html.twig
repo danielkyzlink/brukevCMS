@@ -3,7 +3,7 @@
         
           {% for value in category %}
 	          {% if value.id != 1 %} {# TODO: toto by se mělo rešit spíš v modelu #}
-    	      	<li><a href="{{ path('category', {'slug': value.id}) }}">{{ value.name }}</a></li>
+    	      	<li><a href="{{ path('category', {'seoTitle': value.seoTitle}) }}">{{ value.name }}</a></li>
     	      {% endif %}
           {% endfor %}
         
