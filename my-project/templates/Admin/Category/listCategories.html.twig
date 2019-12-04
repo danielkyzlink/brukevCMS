@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<table>
+    <thead>
+        <tr>
+            <th scope="col">Název</th>
+            <th scope="col">akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+        	<tr>
+        		<td>
+                    {{ category.name }} ({{categoriesCount[category.id]}})
+            	</td>
+            	<td>
+                    <a href="{{ path('saveCategory', { 'categoryId': category.id }) }}">Editovat</a>{% if categoriesCount[category.id] == 0 %} | <a href="{{ path('deleteCategory', { 'categoryId': category.id }) }}">Smazat</a>{% endif %}
+            	</td>
+    		</tr>
+        {% endfor %}
+    </tbody>
+</table>
+    
+{% endblock %}

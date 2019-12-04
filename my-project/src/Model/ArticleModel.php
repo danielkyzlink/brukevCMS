@@ -92,7 +92,6 @@ class ArticleModel
     }
     
     public function createSeoTitle(String $nameOfArticle, int $iterace = 0) {
-        echo($iterace);
         if ($iterace == 0){
             $append = "";
         }else{
@@ -100,9 +99,10 @@ class ArticleModel
         }
         
         $seoTitle = $nameOfArticle . $append;
-        /*setlocale(LC_CTYPE, 'cs_CZ'); //nastaveni iconv - nejak to zlobilo tak oddelavam*/
+        $seoTitle = preg_replace('~[^-a-z0-9_]+~', '', $seoTitle); //vyhodi binec pred iconvem
         $seoTitle = iconv("UTF-8", "ASCII//TRANSLIT", $seoTitle);
         $seoTitle = str_replace(" ", "-", $seoTitle);
+        $seoTitle = preg_replace('~[^-a-z0-9_]+~', '', $seoTitle); //vyhodi binec po iconvu
         
         $article = $this->em
         ->getRepository(Article::class)

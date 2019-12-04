@@ -44,6 +44,10 @@
     				<li><i class="far fa-trash-alt"></i><a href="{{ path('listTrash') }}">Koš</a></li>
         			<li><i class="far fa-file"></i><a href="{{ path('saveArticle') }}">Nový članek</a></li>
         		</ul>
+        		<ul>
+    				<li><i class="far fa-file-alt"></i><a href="{{ path('listCategories') }}">Zobraz kategorie</a></li>
+    				<li><i class="far fa-file-alt"></i><a href="{{ path('saveCategory') }}">Nová kategorie</a></li>
+        		</ul>
     			<ul>
         			{% if not is_granted('ROLE_USER') %}
         				<li><i class="fas fa-sign-in-alt"></i><a href="{{ path('app_login') }}">LOGIN</a></li>

@@ -46,6 +46,7 @@ class Category
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->setSeoTitle("");
     }
 
     public function getId(): ?int

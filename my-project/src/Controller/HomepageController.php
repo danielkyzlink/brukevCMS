@@ -14,7 +14,7 @@ class HomepageController extends AbstractController
      */
     public function showFrontendHP(ArticleModel $am)
     {
-        $data = $am->showArticleByCategory(1);
+        $data = $am->showArticleByCategory('Homepage');
         return $this->render('frontend/homepage/showFE.html.twig', [
             'categoryList' => $data
         ]);

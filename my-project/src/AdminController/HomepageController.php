@@ -1,5 +1,5 @@
 <?php
-// src/AdminController/Article.php
+// src/AdminController/HomepageController.php
 namespace App\AdminController;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
