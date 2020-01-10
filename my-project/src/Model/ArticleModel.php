@@ -35,7 +35,7 @@ class ArticleModel
         return $articles;
     }
     
-    public function showArticleById($articleId) {
+    public function showArticleById(int $articleId) {
         /*$article = $this->em
         ->getRepository(Article::class)
         ->find($articleId);*/
@@ -45,25 +45,17 @@ class ArticleModel
         
         return $article;
     }
-    
-    public function articleByIdToTrash($articleId) {
-        /** @var $article Article */
-        $article = $this->em->getRepository(Article::class)
-        ->find($articleId);
-        
+
+    public function articleToTrash(Article $article) {        
         $this->em->persist($article);
-        $article->setState(0);
+        $article->setState(Article::STATE_SMAZANO);
         
         $this->em->flush();
     }
     
-    public function articleByIdToKoncept($articleId) {
-        /** @var $article Article */
-        $article = $this->em->getRepository(Article::class)
-        ->find($articleId);
-        
+    public function articleToKoncept(Article $article) {
         $this->em->persist($article);
-        $article->setState(2);
+        $article->setState(Article::STATE_REVIZE);
         
         $this->em->flush();
     }
@@ -90,7 +82,7 @@ class ArticleModel
         $this->em->flush();
         
     }
-    
+   
     public function createSeoTitle(String $nameOfArticle, int $iterace = 0) {
         if ($iterace == 0){
             $append = "";
@@ -99,7 +91,6 @@ class ArticleModel
         }
         
         $seoTitle = $nameOfArticle . $append;
-        $seoTitle = preg_replace('~[^-a-z0-9_]+~', '', $seoTitle); //vyhodi binec pred iconvem
         $seoTitle = iconv("UTF-8", "ASCII//TRANSLIT", $seoTitle);
         $seoTitle = str_replace(" ", "-", $seoTitle);
         $seoTitle = preg_replace('~[^-a-z0-9_]+~', '', $seoTitle); //vyhodi binec po iconvu

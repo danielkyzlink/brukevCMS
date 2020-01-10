@@ -67,20 +67,20 @@ class ArticleController extends AbstractController
     }
     
     /**
-     * @Route("/admin/article/articleToTrash/{articleId}", name="articleToTrash")
+     * @Route("/admin/article/articleToTrash/{article}", name="articleToTrash")
      */
-    public function articleToTrash(int $articleId, ArticleModel $articleModel, Request $request)
+    public function articleToTrash(Article $article, ArticleModel $articleModel, Request $request)
     {
-        $articleModel->articleByIdToTrash($articleId);
+        $articleModel->articleToTrash($article);
         return $this->redirectToRoute('listArticle');
     }
     
     /**
-     * @Route("/admin/article/articleSetKoncept/{articleId}", name="articleSetKoncept")
+     * @Route("/admin/article/articleSetKoncept/{article}", name="articleSetKoncept")
      */
-    public function articleToKoncept(int $articleId, ArticleModel $articleModel, Request $request)
+    public function articleToKoncept(Article $article, ArticleModel $articleModel, Request $request)
     {
-        $articleModel->articleByIdToKoncept($articleId);
+        $articleModel->articleToKoncept($article);
         return $this->redirectToRoute('listTrash');
     }
     

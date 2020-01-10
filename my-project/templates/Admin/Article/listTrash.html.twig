@@ -20,7 +20,7 @@
                     {{ article.perex|slice(0, 50) ~ '...' }}
             	</td>
             	<td>
-                    <a href="{{ path('articleSetKoncept', { 'articleId': article.id }) }}">Obnovit do stavu koncept</a>
+                    <a href="{{ path('articleSetKoncept', { 'article': article.id }) }}">Obnovit do stavu koncept</a>
             	</td>
     		</tr>
         {% endfor %}
