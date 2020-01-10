@@ -27,7 +27,7 @@ class ArticleModel
         ->findBy(
             array(
                 'category' => $categoryId,
-                'state' => 1,                
+                'state' => Article::STATE_PUBLIKOVANO,
             ),
             array('dateOfCreated' => 'DESC')
         );
@@ -82,7 +82,19 @@ class ArticleModel
         $this->em->flush();
         
     }
-   
+
+    public function showLatestArticles($quantity) {
+        $articles = $this->em->getRepository(Article::class)
+        ->findBy(
+            array(
+                'state' => Article::STATE_PUBLIKOVANO,
+            ),
+            array('dateOfCreated' => 'DESC'),
+            $quantity
+        );
+        return $articles;
+    }
+
     public function createSeoTitle(String $nameOfArticle, int $iterace = 0) {
         if ($iterace == 0){
             $append = "";

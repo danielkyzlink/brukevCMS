@@ -625,6 +625,25 @@ body.mobile-nav-active #mobile-nav-toggle i {
   transition: all 0.5s ease-in-out 0s;
 }
 
+.feature-block-top-article {
+	background-color: #f8f8f8;
+}
+
+.feature-block-top-article h4 {
+	font-size: 30px;
+}
+
+.feature-block-top-article .perex {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.feature-block-top-article i {
+	color: #000;
+	display: block;
+	text-align: right;
+}
+
 @media (max-width: 991px) {
   .feature-block {
     margin-bottom: 30px;
