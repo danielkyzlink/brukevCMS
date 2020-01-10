@@ -370,6 +370,69 @@ section.article .date-of-created {
   min-width: 180px;
 }
 
+/* Nav DL-MENU */
+nav {
+	text-align: right;
+}
+
+nav ul {
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+	margin: 4px 0;
+}
+
+nav ul li {
+	float: left;
+}
+
+nav ul li a {
+    padding: 8px 8px;
+    text-decoration: none;
+    display: inline-block;
+    color: #555;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0;
+    transition: 0.3s;
+}
+
+nav ul li:hover > a {
+	color: #71c55d;
+}
+
+/* DL-MENU */
+.dl-menuwrapper{
+	float: right;
+}
+
+.dl-menuwrapper .dl-menu {
+    left: 0;
+    top: 100%;
+    margin: 0;
+
+}
+
+.dl-menuwrapper .dl-menu li {
+	float: none;
+}
+
+.dl-menuwrapper button {
+	float: right;
+}
+
+.dl-menuwrapper .nav-menu li:hover > a {
+    color: #000;
+}
+
+/* RESPO MIN */
+@media only screen and (min-width: 801px) {
+	button.dl-trigger {
+		display: none;
+	}
+}
+
 /* Nav Menu Arrows */
 .sf-arrows .sf-with-ul {
   padding-right: 22px;
