@@ -3,7 +3,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-  background-color: #fff;
+  background-color: #e6e6e6;
   color: #333;
   padding-top: 70px;
 }
@@ -74,6 +74,11 @@ span {
 .container-full {
   padding-left: 0;
   padding-right: 0;
+}
+
+.main-container {
+	background-color: #fff;
+	padding: 20px;
 }
 
 .btn {

@@ -29,11 +29,6 @@ class Category
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $parent_id;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $rank;
@@ -42,11 +37,22 @@ class Category
      * @ORM\Column(type="string", unique=true)
      */
     private $seoTitle;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="categories")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parent")
+     */
+    private $categories;
     
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->setSeoTitle("");
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,18 +68,6 @@ class Category
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getParentId(): ?int
-    {
-        return $this->parent_id;
-    }
-
-    public function setParentId(int $parent_id): self
-    {
-        $this->parent_id = $parent_id;
 
         return $this;
     }
@@ -108,5 +102,48 @@ class Category
     public function getProducts(): Collection
     {
         return $this->articles;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(self $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(self $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            // set the owning side to null (unless already changed)
+            if ($category->getParent() === $this) {
+                $category->setParent(null);
+            }
+        }
+
+        return $this;
     }
 }

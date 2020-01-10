@@ -23,11 +23,7 @@ class CategoryModel
     public function saveCategory(Category $category) {
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $this->em->persist($category);
-        
-        
-        //set date
-        $category->setParentId(0);
-        
+                
         //set seoTitle
         if(!$category->getSeoTitle()){
             $category->setSeoTitle($this->createSeoTitle($category->getName()));
@@ -38,7 +34,7 @@ class CategoryModel
     }
     
     public function deleteCategory(int $categoryId) {
-        if ($this->countArticlesInCategory($categoryId) == 0){        
+        if ($this->countArticlesInCategory($categoryId) == 0){
             $category = $this->em->getRepository(Category::class)
                 ->find($categoryId);
             $this->em->remove($category);
@@ -55,24 +51,23 @@ class CategoryModel
         );  
         return count($articles);
     }
-    
+
     public function createSeoTitle(String $nameOfCategory, int $iterace = 0) {
         if ($iterace == 0){
             $append = "";
         }else{
             $append = " " . $iterace;
         }
-        
+
         $seoTitle = $nameOfCategory . $append;
-        $seoTitle = preg_replace('~[^-a-z0-9_]+~', '', $seoTitle); //vyhodi binec pred iconvem
         $seoTitle = iconv("UTF-8", "ASCII//TRANSLIT", $seoTitle);
         $seoTitle = str_replace(" ", "-", $seoTitle);
         $seoTitle = preg_replace('~[^-a-z0-9_]+~', '', $seoTitle); //vyhodi binec po iconvu
-        
+
         $article = $this->em
         ->getRepository(Category::class)
         ->findOneBy(array('seoTitle' => $seoTitle));
-        
+
         if (!$article) {
             return $seoTitle;
         }else{

@@ -2,6 +2,7 @@
 // src/AdminController/CategoryController.php
 namespace App\AdminController;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Category;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,6 +56,11 @@ class CategoryController extends AbstractController
         $form = $this->createFormBuilder($category)
             ->add('name', TextType::class)
             ->add('rank', IntegerType::class)
+            ->add('parent', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'required' => false,
+            ])
             ->add('save', SubmitType::class, ['label' => 'Ulož kategorii']);
         
         $form = $form->getForm($form);

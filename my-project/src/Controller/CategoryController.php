@@ -7,24 +7,28 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Request;
 use App\Model\ArticleModel;
+use App\Repository\CategoryRepository;
 
 class CategoryController extends AbstractController
 {
+    private $categoryRepository;
+    public function __construct(CategoryRepository $categoryRepository){
+        $this->categoryRepository = $categoryRepository;
+    }
+    
     public function showMenu()
-    {
-        $category = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findAll();
+    {   
+        $categories = $this->categoryRepository->findByParent(null);
         
-            if (!$category) {
+        if (!$categories) {
             throw $this->createNotFoundException(
                 'No category found.'
                 );
         }
-            
+        
         // vykresleni menu categorii
         return $this->render('frontend/category/category.html.twig', [
-            'category' => $category,
+            'category' => $categories,
         ]);
     }
     

@@ -43,11 +43,17 @@
       <div id="logo" class="pull-left">
         <h1><a href="/">brukev<span>.cz</span></a></h1>
       </div>
-      {{ render(controller('App\\Controller\\CategoryController:showMenu')) }}
+      
+      <nav id="nav-menu-container">
+          {{ render(controller('App\\Controller\\CategoryController:showMenu')) }}
+      </nav><!-- #nav-menu-container -->
+      
     </div>
   </header><!-- #header -->
 
+<div class="container main-container">
 {% block body %}{% endblock %}
+</div>
 
 {% include 'frontend/footer.html.twig' %}
 
