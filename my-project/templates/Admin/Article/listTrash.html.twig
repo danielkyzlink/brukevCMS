@@ -2,6 +2,7 @@
 
 {% block body %}
 
+{% if articles %}
 <table>
     <thead>
         <tr>
@@ -26,5 +27,8 @@
         {% endfor %}
     </tbody>
 </table>
+{% else %}
+   	Koš je prázdný.
+{% endif %}
     
 {% endblock %}

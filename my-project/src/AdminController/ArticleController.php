@@ -56,11 +56,6 @@ class ArticleController extends AbstractController
             'state' => 0,
         ));
         
-        if (!$articles) {
-            throw $this->createNotFoundException(
-                'No product found.');
-        }
-        
         // vykresleni sablony
         return $this->render('admin/article/listTrash.html.twig', [
             'articles' => $articles,
