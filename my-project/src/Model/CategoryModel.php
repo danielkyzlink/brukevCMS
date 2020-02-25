@@ -20,13 +20,13 @@ class CategoryModel
         return $category;
     }
     
-    public function saveCategory(Category $category) {
+    public function saveCategory(Category $category, SeoModel $seoModel) {
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $this->em->persist($category);
                 
         //set seoTitle
         if(!$category->getSeoTitle()){
-            $category->setSeoTitle($this->createSeoTitle($category->getName()));
+            $category->setSeoTitle($seoModel->createSeoTitle($category->getName()));
         }
                 
         $this->em->flush();
@@ -50,29 +50,5 @@ class CategoryModel
             )
         );  
         return count($articles);
-    }
-
-    public function createSeoTitle(String $nameOfCategory, int $iterace = 0) {
-        if ($iterace == 0){
-            $append = "";
-        }else{
-            $append = " " . $iterace;
-        }
-
-        $seoTitle = $nameOfCategory . $append;
-        $seoTitle = iconv("UTF-8", "ASCII//TRANSLIT", $seoTitle);
-        $seoTitle = str_replace(" ", "-", $seoTitle);
-        $seoTitle = preg_replace('~[^-a-z0-9_]+~', '', $seoTitle); //vyhodi binec po iconvu
-
-        $article = $this->em
-        ->getRepository(Category::class)
-        ->findOneBy(array('seoTitle' => $seoTitle));
-
-        if (!$article) {
-            return $seoTitle;
-        }else{
-            $iterace += 1;
-            return $this->createSeoTitle($nameOfCategory, $iterace);
-        }
     }
 }

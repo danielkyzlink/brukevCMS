@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Model\ArticleModel;
 use App\Model\CategoryModel;
+use App\Model\SeoModel;
 
 class CategoryController extends AbstractController
 {
@@ -44,7 +45,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/admin/category/saveCategory/{categoryId}", requirements={"categoryId"="\d+"}, name="saveCategory")
      */
-    public function saveCategory(int $categoryId = null, Request $request, CategoryModel $categoryModel)
+    public function saveCategory(int $categoryId = null, Request $request, CategoryModel $categoryModel, SeoModel $seoModel)
     {
         // vytvarim novou Category nebo nacitam stavajici podle $categoryId z URL
         if($categoryId){
@@ -73,7 +74,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
             
-            $categoryModel->saveCategory($category);
+            $categoryModel->saveCategory($category, $seoModel);
             
         }
         

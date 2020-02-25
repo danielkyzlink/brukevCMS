@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Model\FileUploadModel;
 use App\Model\ArticleModel;
 use PhpParser\Node\Stmt\Label;
+use App\Model\SeoModel;
 
 class ArticleController extends AbstractController
 {
@@ -91,7 +92,7 @@ class ArticleController extends AbstractController
      *
      * @IsGranted("ROLE_USER")
      */
-    public function saveArticle(int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload)
+    public function saveArticle(int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload, SeoModel $seoModel)
     {   
         // TODO mela by se vyresit kontrola existence articlu s danym ID
         
@@ -140,7 +141,7 @@ class ArticleController extends AbstractController
             $article = $form->getData();
             $picture = $form['picture']->getData();
             
-            $articleModel->saveArticle($article, $picture, $fileUpload);
+            $articleModel->saveArticle($article, $picture, $fileUpload, $seoModel);
 
         }
             
