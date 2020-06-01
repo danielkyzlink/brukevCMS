@@ -41,17 +41,9 @@ class ArticleController extends AbstractController
             ));
         
         if (!$article) {
-            if ($seoTitle == "admin") {
-                $response = $this->forward('App\AdminController\HomepageController::showHp');
-                return $response;                
-            }            
-            
-            /*
             throw $this->createNotFoundException(
                 'No product found for id '.$seoTitle
-                
             );
-            */
         }
             
         // vykresleni sablony s clankem dle ID
