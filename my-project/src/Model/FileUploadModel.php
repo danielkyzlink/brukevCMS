@@ -28,9 +28,9 @@ class FileUploadModel
         }
         
         if ($type == "MASTER"){
-            $dirName = __DIR__ . '/../../public/uploads/img/master/'; //toto asi neni uplne cajk reseni cesty k obrazkum :-(
+            $dirName = 'uploads/img/master/';
         }else{
-            $dirName = __DIR__ . '/../../public/uploads/img/'; //toto asi neni uplne cajk reseni cesty k obrazkum :-(
+            $dirName = 'uploads/img/';
         }
         
         $this->originalFileName = $image->getClientOriginalName();

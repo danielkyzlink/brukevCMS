@@ -24,6 +24,7 @@
   			    '//www.tiny.cloud/css/codepen.min.css'
   			  ],
   			  images_upload_url: '{{ path('fileUpload') }}',
+  			  relative_urls : false,
 			  setup: function (editor) {
   				editor.on('change', function () {
   				  editor.save();
