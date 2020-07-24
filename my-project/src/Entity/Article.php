@@ -24,11 +24,6 @@ class Article
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
     private $category;
-    
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;    
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -75,18 +70,6 @@ class Article
     public function getId(): ?int
     {
         return $this->id;
-    }
-    
-    public function getActive(): ?bool
-    {
-        return $this->active;
-    }
-    
-    public function setActive(?bool $active): self
-    {
-        $this->active = $active;
-        
-        return $this;
     }
 
     public function getName(): ?string

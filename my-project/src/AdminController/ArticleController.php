@@ -100,7 +100,6 @@ class ArticleController extends AbstractController
         
         //vytvoreni formulare
         $form = $this->createFormBuilder($article)
-            ->add('active', CheckboxType::class)
             ->add('state', ChoiceType::class, [
                 'choices' => [
                     'Publikovat' => 1,
