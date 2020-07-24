@@ -71,7 +71,9 @@ class ArticleModel
         }
         
         //set date
-        $article->setDateOfCreated(new \DateTime());
+        if(!$article->getDateOfCreated()){
+            $article->setDateOfCreated(new \DateTime());
+        }
 
         //set seoTitle
         if(!$article->getSeoTitle()){
