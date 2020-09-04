@@ -21,5 +21,16 @@
     {{ article.dateOfCreated|date('d. m. Y') }}
     </div>
   </section>
+  <span id="comments"></span>
+  {{ form(form) }}
+  <div class="komentare">
+      {% for comment in comments %}
+    	<div class="komentar">
+          <h4>{{ comment.name }}</h4><span>{{ comment.dateOfComment|date('d. m. Y H:i') }}</span>
+          <p>{{ comment.text }}</p>
+    	</div>
+      {% endfor %}
+  </div>
+  
 </div>
 {% endblock %}

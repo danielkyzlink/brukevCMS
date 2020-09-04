@@ -17,13 +17,17 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Model\FileUploadModel;
+use App\Model\CommentModel;
+use App\Entity\Comment;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class ArticleController extends AbstractController
 {
     /**
      * @Route("/{seoTitle}", name="showArticleDetail")
      */
-    public function showArticle($seoTitle)
+    public function showArticle($seoTitle, Request $request, CommentModel $commentModel)
     {
         
         /* zobraz koncept jen prihlasenym */
@@ -45,10 +49,61 @@ class ArticleController extends AbstractController
                 'No product found for id '.$seoTitle
             );
         }
+        
+        
+        /* comment form */
+        $comment = new Comment();
+        $form = $this->createFormBuilder($comment)
+            ->add('name', TextType::class, [
+                'label'=>  'Jméno',
+            ])
+            ->add('email', EmailType::class, [
+                'required' => false,
+                'help' => 'email se nebude zobrazovat',
+                'label'=>  'E-mail',
+            ])
+            ->add('fuj', TextType::class, [
+                'help' => 'Kontrola člověčenství',
+                'label'=> 'Napište který den předchází neděli',
+                'mapped' => false,
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/sobota/',
+                        'message' => 'spammmm',
+                    ])
+                ],
+            ])
+            ->add('text', TextareaType::class, [
+                'label'=>  'Komentář',
+            ])
+            /* přidat antispam */
+            ->add('save', SubmitType::class, [
+                'label' => 'Zveřejnit komentář',                
+            ]);
+        $form = $form->getForm($form);
+        
+        //asi odchyd POSTu
+        $form->handleRequest($request);
+        
+        //formular odeslan
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $comment = $form->getData();
+            $commentModel->addComment($comment, $article);
+            
+            $this->addFlash('success', 'Komentář úspěšně vložen.');
+            return $this->redirect($request->getUri());
+        }else if ($form->isSubmitted() && !$form->isValid()){
+            $this->addFlash('warning', 'Formulář obsahuje chybu. <a href="#comments">opravit</a>');
+        }
+        
+        $comments = $commentModel->showComments($article);
             
         // vykresleni sablony s clankem dle ID
         return $this->render('frontend/article/showArticle.html.twig', [
             'article' => $article,
+            'form' => $form->createView(),
+            'comments' => $comments,
         ]);
-    }
+    }    
 }
