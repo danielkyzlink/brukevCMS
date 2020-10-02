@@ -70,6 +70,16 @@ table th {
     text-align: left;
 }
 
+table tbody tr.table-remove {
+	background-color: rgba(230, 230, 242, .2);
+	color: #777;
+}
+
+/* COLORS */
+.warning-text {
+	color: #d44950;
+}
+
 /* login-page */
 main.login-page form {
     max-width: 450px;

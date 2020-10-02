@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+<table>
+    <tbody>
+      {% for comment in comments %}
+      	<tr {% if comment.state == 0 %}class="table-remove"{% endif %}>
+      		<td>
+              <b>{{ comment.name }}</b> (<span>{{ comment.dateOfComment|date('d. m. Y H:i') }}</span>)
+    	      <p>{{ comment.text }}</p>
+    		</td>
+    		<td>
+        		{% if comment.state == 1 %}
+        			<a href="{{ path('showArticleDetail', { 'seoTitle': comment.article.seoTitle }) }}#commentId-{{ comment.id }}" target="_blank">Zobrazit v článku</a> | <a class="warning-text" href="{{ path('commentToTrash', { 'comment': comment.id }) }}">Smazat</a>
+        		{% else %}
+        			<a href="{{ path('commentToPublic', { 'comment': comment.id }) }}">obnovit</a>
+        		{% endif %}
+    		</td>
+    	</tr>
+      {% endfor %}     
+        
+    </tbody>
+</table>
+
+
+{% endblock %}

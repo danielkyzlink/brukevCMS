@@ -28,6 +28,7 @@
     	<div class="komentar">
           <h4>{{ comment.name }}</h4><span>{{ comment.dateOfComment|date('d. m. Y H:i') }}</span>
           <p>{{ comment.text }}</p>
+          <div class="div-for-anchor" id="commentId-{{ comment.id }}"></div>
     	</div>
       {% endfor %}
   </div>

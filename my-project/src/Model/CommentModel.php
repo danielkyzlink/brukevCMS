@@ -28,6 +28,16 @@ class CommentModel
         return $comments;
     }
     
+    public function showAllComments() {
+        $comments = $this->em
+        ->getRepository(Comment::class)
+        ->findBy(
+            array(),
+            array('date_of_comment' => 'DESC')
+        );
+        return $comments;
+    }
+    
     public function addComment(Comment $comment, Article $article) {
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $this->em->persist($comment);
@@ -41,5 +51,17 @@ class CommentModel
                 
         $this->em->flush();
         
+    }
+    
+    public function commentToTrash(Comment $comment) {
+        $this->em->persist($comment);
+        $comment->setState(Comment::STATE_SMAZANO);
+        $this->em->flush();
+    }
+    
+    public function commentToPublic(Comment $comment) {
+        $this->em->persist($comment);
+        $comment->setState(Comment::STATE_PUBLIKOVANO);
+        $this->em->flush();
     }
 }

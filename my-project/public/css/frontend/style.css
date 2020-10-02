@@ -1524,4 +1524,14 @@ body.mobile-nav-active #mobile-nav-toggle i {
 	font-color: #ccc;
 	font-size: 12px;
 	border-bottom: 1px solid #ccc;	
+	position: relative;
+}
+
+/* ANCHOR */
+.div-for-anchor {
+	width: 1px;
+	height: 1px;
+	background-color: transparent;
+	position: absolute;
+	top: -70px;
 }

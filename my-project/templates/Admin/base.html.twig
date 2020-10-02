@@ -47,7 +47,10 @@
         		</ul>
         		<ul>
     				<li><i class="far fa-file-alt"></i><a href="{{ path('listCategories') }}">Zobraz kategorie</a></li>
-    				<li><i class="far fa-file-alt"></i><a href="{{ path('saveCategory') }}">Nová kategorie</a></li>
+    				<li><i class="far fa-file"></i><a href="{{ path('saveCategory') }}">Nová kategorie</a></li>
+        		</ul>
+        		<ul>
+    				<li><i class="far fa-comment"></i><a href="{{ path('listComments') }}">Zobraz komentáře</a></li>
         		</ul>
     			<ul>
         			{% if not is_granted('ROLE_USER') %}
