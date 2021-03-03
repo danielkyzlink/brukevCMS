@@ -16,7 +16,7 @@ class CommentController extends AbstractController
     {
         $comments = $commentModel->showAllComments();
         // vykresleni sablony
-        return $this->render('admin/Comment/listComments.html.twig', [
+        return $this->render('admin/comment/listComments.html.twig', [
             'comments' => $comments,
         ]);
     }
