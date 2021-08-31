@@ -19,3 +19,7 @@
 
 ### public images ###
 /public/uploads/
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
