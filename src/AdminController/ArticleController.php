@@ -82,10 +82,6 @@ class ArticleController extends AbstractController
     
     /**
      * @Route("/admin/article/saveArticle/{articleId}", requirements={"articleId"="\d+"}, name="saveArticle")
-     * 
-     * Require ROLE_USER for only this controller method.
-     *
-     * @IsGranted("ROLE_USER")
      */
     public function saveArticle(int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload, SeoModel $seoModel)
     {   
@@ -147,10 +143,6 @@ class ArticleController extends AbstractController
     
     /**
      * @Route("/admin/article/fileUpload", name="fileUpload", methods={"POST"})
-     *
-     * Require ROLE_USER for only this controller method.
-     *
-     * @IsGranted("ROLE_USER")
      */
     public function fileUpload(Request $request, FileUploadModel $fileUpload)
     {
