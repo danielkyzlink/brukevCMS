@@ -110,7 +110,6 @@ class SeoModel
         $seoTitle  = strtr($seoTitle, $prevodni_tabulka);
         $seoTitle = str_replace(" ", "-", $seoTitle);
         $seoTitle = preg_replace('~[^-a-zA-Z0-9_]+~', '', $seoTitle); //vyhodi skarede znaky binec
-        dd($seoTitle);
         
         $article = $this->em
         ->getRepository(Article::class)
