@@ -51,6 +51,9 @@
         		</ul>
         		<ul>
     				<li><i class="far fa-comment"></i><a href="{{ path('listComments') }}">Zobraz komentáře</a></li>
+        		</ul>        		
+        		<ul>
+    				<li><i class="fas fa-cogs"></i><a href="{{ path('listConfig') }}">Nastavení</a></li>
         		</ul>
     			<ul>
         			{% if not is_granted('ROLE_USER') %}
