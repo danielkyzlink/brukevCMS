@@ -1,0 +1,62 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<table>
+    <thead>
+        <tr>
+            <th scope="col">Jméno</th>
+            <th scope="col">Příjmení</th>
+            <th scope="col">Nickname</th>
+            <th scope="col">Email</th>
+			<th scope="col">Role</th>
+			<th scope="col">Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}            
+            <tr{% if user.state == 2  %} class="table-remove"{% endif %}>
+            	<td>
+                    {{ user.name }}
+                </td>
+                <td>
+                    {{ user.surname }}
+                </td>
+                <td>
+                    {{ user.nickname }}
+                </td>
+                <td>
+                    {{ user.email }}
+                </td>
+                <td>
+            		{% for role in user.roles %}
+                		{% if role == 'ROLE_USER' %}
+                            User
+                        {% elseif role == 'ROLE_EDITOR' %}
+                            Editor
+                        {% elseif role == 'ROLE_ADMIN' %}
+                            Admin
+                        {% else %}
+                        	Nedefinováno
+                        {% endif %}
+                        {% if not loop.last %}|{% endif %}
+            		{% endfor %}
+            	</td>
+            	<td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {% if user.state == 2  %}
+                        	<a href="{{ path('userUnblocked', { 'user': user.id }) }}">Odblokovat</a>
+                        {% else %}
+                        	<a href="{{ path('userToBlocked', { 'user': user.id }) }}" class="warning-text">Blokovat</a>
+                        {% endif %}
+                        | <a href="{{ path('editUser', { 'userId': user.id }) }}">Editovat</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}        
+    </tbody>
+</table>
+        <br>
+        <a href="{{ path('app_register') }}" class="btn">Registrace</a>
+
+{% endblock %}

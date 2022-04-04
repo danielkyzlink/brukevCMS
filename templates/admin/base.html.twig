@@ -62,7 +62,7 @@
         			{% if is_granted('ROLE_USER') %}
         				<li><i class="fas fa-sign-out-alt"></i><a href="{{ path('app_logout') }}">LOGOUT</a></li>
                     {% endif %}
-        			<li><i class="far fa-address-card"></i><a href="{{ path('app_register') }}">Registrace</a></li>
+        			<li><i class="far fa-address-card"></i><a href="{{ path('listUsers') }}">Uživatelé</a></li>
 				</ul>
             {% endblock %}
         </nav>
