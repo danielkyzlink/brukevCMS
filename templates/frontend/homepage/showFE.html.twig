@@ -2,48 +2,41 @@
 
 {% block body %}
 
-<div class="container">
-<div class="row">
-{% for article in latestArticles %}
-    {% if loop.first %}
-	    <div class="col-lg-12">
-          <a href="{{ path('showArticleDetail', { 'seoTitle': article.seoTitle }) }}">
-            <div class="feature-block feature-block-top-article row">
-           		<div class="col-lg-6">
-              		<img src="../../uploads/img/master/{{ article.picture }}" alt="img" class="">
-              	</div>
-              	<div class="col-lg-6">
-              		<h4>{{ article.name|raw }}</h4>
-              		<p class="perex">{{ article.perex|raw }}</p>
-
-                    {% set paragraphs = article.text|split('</p>') %}
-                    {% set firstParagraph = paragraphs|first ~ '</p>' %}
-                    {% set firstParagraph = firstParagraph|striptags %}
-                    {% set firstParagraph = firstParagraph|slice(0, 333) %}
-              		<p>{{ firstParagraph }}</p>
-              		<i>{{ article.dateOfCreated|date('d. m. Y') }}</i>
-              	</div>
-            </div>
-          </a>
+        <div class="banner">
+            <img src="img/banner1.jpg">
         </div>
-    {% else %}
-        <div class="col-md-6 col-lg-4">
-          <a href="{{ path('showArticleDetail', { 'seoTitle': article.seoTitle }) }}">
-            <div class="feature-block">
-              <img src="../../uploads/img/master/{{ article.picture }}" alt="img" class="img-fluid">
-              <h4>{{ article.name|raw }}</h>
-              <p>{{ article.perex|raw }}</p>
+        <main>
+            <div class="box-container">
+                <div class="box">
+                    <h1>{{ space.getArticleInSpace('Hotel').name }}</h1>
+                    {{ space.getArticleInSpace('Hotel').text|raw }}
+                </div>
+                <div class="box">
+                    <h1>{{ space.getArticleInSpace('Lyzovani').name }}</h1>
+                    {{ space.getArticleInSpace('Lyzovani').text|raw }}
+                </div>
+                <div class="box box100">
+                    <h1>{{ space.getArticleInSpace('Objednavky').name }}</h1>
+                    {{ space.getArticleInSpace('Objednavky').text|raw }}
+                </div>
+        </main>
+        <div class="gallery">
+            <div class="gallery-slickme">
+                <img src="img/gallery/hotel.jpg">
+                <img src="img/gallery/1.jpg">
+                <img src="img/gallery/2.jpg">
+                <img src="img/gallery/3.jpg">
+                <img src="img/gallery/4.jpg">
+                <img src="img/gallery/5.jpg">
+                <img src="img/gallery/6.jpg">
+                <img src="img/gallery/7.jpg">
+                <img src="img/gallery/9.jpg">
+                <img src="img/gallery/10.jpg">
+                <img src="img/gallery/11.jpg">
+                <img src="img/gallery/12.jpg">
             </div>
-          </a>
         </div>
-    {% endif %}
-{% endfor %}
-</div>
-</div>
-
-{% for article in categoryList %}
-        {{ article.text|raw }}
-{% endfor %}
+    </div>
 
 
 {% endblock %}

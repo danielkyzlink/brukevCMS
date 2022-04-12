@@ -1,0 +1,36 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<table>
+    <thead>
+        <tr>
+            <th scope="col">název</th>
+            <th scope="col">textId</th>
+            <th scope="col">Článek</th>
+            <th scope="col">Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for space in spaces %}            
+            <tr>
+            	<td>
+                    {{ space.name }}
+                </td>
+                <td>
+                    {{ space.textId }}
+                </td>
+                <td>
+                    {{ space.article.name }}
+                </td>
+				<td>
+                    <a href="{{ path('editSpace', { 'spaceId': space.id }) }}">Editovat</a>
+                </td>
+            </tr>
+        {% endfor %}        
+    </tbody>
+</table>
+
+<br>
+<a href="{{ path('addSpace') }}" class="btn btn-primary">Přidat space</a>
+{% endblock %}

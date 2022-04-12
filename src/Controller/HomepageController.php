@@ -8,19 +8,20 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Model\ArticleModel;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use App\Model\SpaceModel;
 
 class HomepageController extends AbstractController
 {
     /**
      * @Route("/", name="FEhome")
      */
-    public function showFrontendHP(ArticleModel $am)
+    public function showFrontendHP(ArticleModel $am, SpaceModel $spaceModel)
     {   
-        $homepageArticles = $am->showArticleByCategory('Homepage');
+        $space = $spaceModel;
         $latestArticles = $this->showLatestArticles($am, 7);
         return $this->render('frontend/homepage/showFE.html.twig', [
-            'categoryList' => $homepageArticles,
             'latestArticles' => $latestArticles,
+            'space' => $space,
         ]);
     }
     
