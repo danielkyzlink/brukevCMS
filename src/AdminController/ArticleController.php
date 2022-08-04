@@ -81,9 +81,9 @@ class ArticleController extends AbstractController
     }
     
     /**
-     * @Route("/admin/article/saveArticle/{articleId}", requirements={"articleId"="\d+"}, name="saveArticle")
+     * @Route("/admin/article/saveArticle/{articleId}", requirements={"articleId"="\d+"}, defaults={"articleId"=null}, name="saveArticle")
      */
-    public function saveArticle(int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload, SeoModel $seoModel)
+    public function saveArticle(?int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload, SeoModel $seoModel)
     {   
         // TODO mela by se vyresit kontrola existence articlu s danym ID
         
@@ -103,12 +103,12 @@ class ArticleController extends AbstractController
                 ],
             ])
             ->add('name', TextType::class)
-            ->add('perex', TextType::class);
+            ->add('perex', TextType::class, array('required' => false));
         
             if($articleId){
                 $form->add('picture', FileType::class, array('mapped' => false, 'required' => false, 'help' => $article->getPicture()));
             }else{
-                $form->add('picture', FileType::class);
+                $form->add('picture', FileType::class, array('required' => false));
             };
             
             

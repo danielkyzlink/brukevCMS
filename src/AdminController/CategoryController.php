@@ -43,9 +43,9 @@ class CategoryController extends AbstractController
     
     
     /**
-     * @Route("/admin/category/saveCategory/{categoryId}", requirements={"categoryId"="\d+"}, name="saveCategory")
+     * @Route("/admin/category/saveCategory/{categoryId}", requirements={"categoryId"="\d+"}, defaults={"categoryId"=null}, name="saveCategory")
      */
-    public function saveCategory(int $categoryId = null, Request $request, CategoryModel $categoryModel, SeoModel $seoModel)
+    public function saveCategory(?int $categoryId = null, Request $request, CategoryModel $categoryModel, SeoModel $seoModel)
     {
         // vytvarim novou Category nebo nacitam stavajici podle $categoryId z URL
         if($categoryId){

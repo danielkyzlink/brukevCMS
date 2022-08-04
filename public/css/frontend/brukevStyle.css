@@ -1,0 +1,423 @@
+/* ------------------------------- FONTS ------------------------------- */
+/*
+*  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+*/
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fontAwesome/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../fontAwesome/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fontAwesome/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fontAwesome/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fontAwesome/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat/Montserrat-VariableFont_wght.ttf');
+}
+/* ------------------------------- BASIC ------------------------------- */
+
+/* ------------------------------- !!!end of BASIC ------------------------------- */
+	*, *:before, *:after {
+	  box-sizing: border-box;
+	}
+
+	img {
+		max-width: 100%;
+	}
+/* ------------------------------- !!!end of FONTS ------------------------------- */
+
+/* ------------------------------- MAIN LAYOUT GRID ------------------------------- */
+body {
+	margin: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-areas:
+    	"header"
+    	"flash"
+    	"main-container"
+    	"footer";
+}
+
+header {
+	grid-area: header;
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+	grid-template-areas:
+    	"logo nav";
+    align-items: center;
+}
+
+.main-container {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	grid-area: main-container;
+	display: grid;
+	grid-template-columns: minmax(0 ,1fr);
+	grid-template-areas:
+    	"banner"
+    	"main"
+        "gallery";
+}
+
+.flash-msg {
+	grid-area: flash;
+}
+
+.banner {
+	grid-area: banner;
+}
+
+main {
+	grid-area: main;
+}
+
+.gallery {
+	grid-area: gallery;
+}
+
+footer {
+	grid-area: footer;
+}
+
+header img {
+	grid-area: logo;
+}
+
+nav {
+	grid-area: nav;
+}
+
+/* ------------------------------- !!!end of MAIN LAYOUT GRID ------------------------------- */
+
+/* ------------------------------- COLORS ------------------------------- */
+
+html {
+	background-color: #eee;
+}
+
+header {
+	/*background-color: #F8F8F8;*/
+}
+
+.main-container {
+	background-color: #fff;
+	padding: 10px;
+}
+
+footer {
+	/*background-color: gold;*/
+}
+
+/* ------------------------------- !!!end of COLORS ------------------------------- */
+
+/* ------------------------------- FONTS ------------------------------- */
+body {
+    font-family: Montserrat;
+	/*font-family: "Roboto", sans-serif;*/
+}
+
+/*
+h1 {
+	font-family: "Athiti", sans-serif;
+}
+*/
+
+h2 {
+	font-weight: normal;
+	color: #666;
+}
+
+/* ------------------------------- !!!end of FONTS ------------------------------- */
+
+/* ------------------------------- RESET ------------------------------- */
+a:link,
+a:visited,
+a:hover,
+a:active {
+	color: #000;
+	text-decoration: none;
+}
+/* ------------------------------- !!!end of RESET ------------------------------- */
+
+/* ------------------------------- HEADER ------------------------------- */
+header {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 20px 10px 0 10px;
+}
+
+header h1 {
+	color: #505050;
+	font-family: "Athiti", sans-serif;
+	font-size: 26px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	margin: 0;
+}
+
+header h1 span {
+    color: #71c55d;
+}
+
+header img {
+    width: 220px;
+}
+
+/* ------------------------------- !!!end of HEADER ------------------------------- */
+
+/* ------------------------------- FLASH ------------------------------- */
+.flash-msg {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.flash-msg.flash-success {
+	color: #155724;
+	background-color: #d4edda;
+}
+
+.flash-msg.flash-info {
+	color: #004085;
+	background-color: #cce5ff;
+}
+
+.flash-msg.flash-danger {
+	color: #721c24;
+	background-color: #f8d7da;
+}
+/* ------------------------------- !!!end of FLASH ------------------------------- */
+
+
+/* ------------------------------- NAV ------------------------------- */
+nav {
+
+}
+
+nav ul {
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+    float: right;
+}
+
+nav ul li {
+	float: left;
+    margin: 0 6px;
+}
+
+nav ul li a {
+    padding: 8px 8px;
+    text-decoration: none;
+    display: inline-block;
+    color: #555;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 0;
+    transition: 0.3s;
+}
+
+nav ul li > a {
+    border-bottom: 4px solid transparent;
+}
+
+nav ul li:hover > a {
+	border-color: #338E3F;
+}
+
+/* nav subcat */
+nav ul li ul {
+	display: none;
+	position: absolute;
+	background-color: #fff;
+}
+/*  */
+nav ul li ul li {
+	float: none;
+}
+
+nav ul li:hover ul,
+nav ul li ul:hover {
+	display: block;
+}
+/* ------------------------------- !!!end of NAV ------------------------------- */
+
+
+/* ------------------------------- BANNER ------------------------------- */
+.banner {
+    padding-bottom: 5px;
+}
+/* ------------------------------- !!!end of BANNER ------------------------------- */
+
+
+/* ------------------------------- BOX ------------------------------- */
+.box-container {
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.box-container .box {
+	width: 1fr;
+    background-color: #ddd;
+    padding: 10px;
+}
+
+.box-container .box100 {
+	grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+/* ------------------------------- BTN ------------------------------- */
+.btn {
+    display: block;
+    cursor: pointer;
+}
+
+.btn,
+a.btn {
+    border-radius: 5px;
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    display: inline-block;
+    transition-duration: 0.2s;
+}
+
+.btn:hover,
+a.btn:hover {
+    background-color: #992d2d;
+}
+
+.btn-new-city,
+.btn-new-venue {
+	margin: 0 auto;
+	width: max-content;
+	clear: both;
+}
+
+.btn.btn-danger {
+	background-color: #ffa500;
+}
+
+/* ------------------------------- !!!end of BTN ------------------------------- */
+
+/* ------------------------------- FORMS ------------------------------- */
+label,
+input {
+	display: block;
+}
+
+input[type='checkbox'] {
+	display: inline-block;
+}
+
+label {
+	padding-top: 15px;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+button {
+	border: none;
+	font-size: 16px;
+	margin-top: 10px;
+}
+/* ------------------------------- !!!end of FORMS ------------------------------- */
+
+/* ------------------------------- STATE ------------------------------- */
+ul.state {
+	list-style: none;
+}
+
+ul.state li {
+	display: inline-block;
+	background-color: #00b30f;
+	padding: 3px 6px;
+}
+
+ul.state li.active {
+	background-color: #ff6767;
+}
+
+ul.state li a {
+	color: #fff;
+}
+/* ------------------------------- !!!end of STATE ------------------------------- */
+
+/* ------------------------------- FOOTER ------------------------------- */
+footer .inner {
+	display: grid;
+	grid-auto-columns: minmax(0, 1fr);
+	grid-template-areas:
+		"footer-box-1 footer-box-2 footer-box-3 footer-box-4";
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+footer .footer-box-1 {
+	grid-area: footer-box-1;
+}
+
+footer .footer-box-2 {
+	grid-area: footer-box-2;
+}
+
+footer .footer-box-3 {
+	grid-area: footer-box-3;
+}
+
+footer .footer-box-4 {
+	grid-area: footer-box-4;
+}
+
+footer .footer-box {
+	padding: 20px;
+}
+
+footer .footer-box:nth-child(even) {
+  background: #ccc;
+}
+
+footer .footer-box h1 {
+	margin: 0;
+	font-size: 18px;
+}
+
+footer .footer-box ul {
+	list-style: none;
+	padding-left: 5px;
+}
+/* ------------------------------- !!!end of FOOTER ------------------------------- */
+
+/* ------------------------------- SLICK SLIDER ------------------------------- */
+    .slider {
+        width: 50%;
+        margin: 100px auto;
+    }
+    
+
+    .slick-slide {
+      margin: 0px 10px;
+      height: 100%;
+    }
+
+    .slick-slide img {
+      width: 100%;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black !important;
+    }
+/* ------------------------------- !!!end of SLICK SLIDER ------------------------------- */
+
+/* ------------------------------- GALLERY ------------------------------- */
+    .gallery {
+        padding-top: 10px;
+    }
+/* ------------------------------- !!!end of GALLERY ------------------------------- */

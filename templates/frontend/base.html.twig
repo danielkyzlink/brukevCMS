@@ -2,60 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>brukev.cz</title>
+  <title>/*DEMO</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="brukev, zahrada" name="keywords">
-  <meta content="Zahradnický portál" name="description">
+  <meta content="brukev, CMS, demo" name="keywords">
+  <meta content="demo brukev web" name="description">
 
-  <!-- Favicons -->
   <link href="{{ asset('img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-  <!-- RerspoMenu -->
-  <link rel="stylesheet" href="{{ asset('lib/RespoMenu/css/component.css') }}" type="text/css"/>
-  <script src="{{ asset('lib/RespoMenu/js/modernizr.custom.js') }}"></script>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Athiti&display=swap" rel="stylesheet">
-
-
-  <!-- Bootstrap css -->
-  <link href="{{ asset('lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-  
   <!-- Main Stylesheet File -->
-  <link href="{{ asset('css/frontend/style.css') }}" rel="stylesheet">
-  
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148811395-1"></script>
-  <script>
-  	window.dataLayer = window.dataLayer || [];
-  	function gtag(){dataLayer.push(arguments);}
-  	gtag('js', new Date());
-
-  	gtag('config', 'UA-148811395-1');
-  </script>
-  
-
+  <link href="{{ asset('css/frontend/brukevStyle.css') }}" rel="stylesheet">
 </head>
 
 <body>
+    <header>
+        <a href="#" class=""><img src="demo-brukev-logo.png"></a>
+  		<nav id="main-nav">
+            {{ render(controller('App\\Controller\\CategoryController:showMenu')) }}
+    	</nav>
+    </header>
 
-  <header id="header" class="header header-hide">
-    <div class="container">
 
-      <div id="logo" class="pull-left">
-        <h1><a href="/">brukev<span>.cz</span></a></h1>
-      </div>
-      
-      <nav id="dl-menu">
-          {{ render(controller('App\\Controller\\CategoryController:showMenu')) }}
-      </nav><!-- #nav-menu-container -->
-      
-    </div>
-  </header><!-- #header -->
 
-<div class="container main-container">
+
+  
+<div class="main-container">
 {% for message in app.flashes('success') %}
     <div class="alert alert-success" role="alert">
       {{ message }}
@@ -72,26 +42,7 @@
 {% include 'frontend/footer.html.twig' %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="{{ asset('lib/RespoMenu/js/jquery.dlmenu.js') }}"></script>
 
-<!-- DL-MENU -->
-<script>
-	function toggleDlMenu(){
-		if($(window).width() < 801){
-		    $('#dl-menu').addClass('dl-menuwrapper');
-			$( '#dl-menu' ).dlmenu();
-		}else{
-			$('#dl-menu').removeClass('dl-menuwrapper');
-		}
-	}
-
-	$(function() {
-		toggleDlMenu();
-		$( window ).resize(function() {
-			toggleDlMenu();
-		});
-	});
-</script>
   
 </body>
 </html>
