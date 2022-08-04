@@ -1,7 +1,0 @@
-controllers:
-    resource: ../../src/Controller/
-    type: annotation
-
-adminControllers:
-    resource: ../../src/AdminController/
-    type: annotation
