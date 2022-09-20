@@ -13,16 +13,16 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Model\ArticleModel;
 use App\Model\CategoryModel;
 use App\Model\SeoModel;
+use Doctrine\Persistence\ManagerRegistry;
 
 class CategoryController extends AbstractController
 {
     /**
      * @Route("/admin/category/listCategories", name="listCategories")
      */
-    public function listCategories(CategoryModel $categoryModel)
+    public function listCategories(CategoryModel $categoryModel, ManagerRegistry $doctrine)
     {
-        $categories = $this->getDoctrine()
-            ->getRepository(Category::class)
+        $categories = $doctrine->getRepository(Category::class)
             ->findAll();
         
         if (!$categories) {
@@ -56,7 +56,7 @@ class CategoryController extends AbstractController
         
         $form = $this->createFormBuilder($category)
             ->add('name', TextType::class)
-            ->add('rank', IntegerType::class)
+            ->add('rankInMenu', IntegerType::class)
             ->add('parent', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',

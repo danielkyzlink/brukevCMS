@@ -20,16 +20,16 @@ use App\Model\FileUploadModel;
 use App\Model\ArticleModel;
 use PhpParser\Node\Stmt\Label;
 use App\Model\SeoModel;
+use Doctrine\Persistence\ManagerRegistry;
 
 class ArticleController extends AbstractController
 {
     /**
      * @Route("/admin/article/listArticle", name="listArticle")
      */
-    public function listArticles()
+    public function listArticles(ManagerRegistry $doctrine)
     {
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
+        $articles = $doctrine->getRepository(Article::class)
             ->findBy(array(
                 'state' => array(1,2),
             ));
@@ -48,10 +48,9 @@ class ArticleController extends AbstractController
     /**
      * @Route("/admin/article/listTrash", name="listTrash")
      */
-    public function listTrash()
+    public function listTrash(ManagerRegistry $doctrine)
     {
-        $articles = $this->getDoctrine()
-        ->getRepository(Article::class)
+        $articles = $doctrine->getRepository(Article::class)
         ->findBy(array(
             'state' => 0,
         ));
@@ -83,7 +82,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/admin/article/saveArticle/{articleId}", requirements={"articleId"="\d+"}, defaults={"articleId"=null}, name="saveArticle")
      */
-    public function saveArticle(?int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload, SeoModel $seoModel)
+    public function saveArticle(int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload, SeoModel $seoModel)
     {   
         // TODO mela by se vyresit kontrola existence articlu s danym ID
         

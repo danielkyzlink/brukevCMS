@@ -21,13 +21,14 @@ use App\Model\CommentModel;
 use App\Entity\Comment;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Validator\Constraints\Regex;
+use Doctrine\Persistence\ManagerRegistry;
 
 class ArticleController extends AbstractController
 {
     /**
      * @Route("/{seoTitle}", name="showArticleDetail")
      */
-    public function showArticle($seoTitle, Request $request, CommentModel $commentModel)
+    public function showArticle($seoTitle, Request $request, CommentModel $commentModel, ManagerRegistry $doctrine)
     {
         
         /* zobraz koncept jen prihlasenym */
@@ -37,8 +38,7 @@ class ArticleController extends AbstractController
             $statesArray  = array(1);
         }
         
-        $article = $this->getDoctrine()
-            ->getRepository(Article::class)
+        $article = $doctrine->getRepository(Article::class)
             ->findOneBy(array(
                 'seoTitle' => $seoTitle,
                 'state' => $statesArray,

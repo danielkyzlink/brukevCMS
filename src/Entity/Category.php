@@ -31,7 +31,7 @@ class Category
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $rank;
+    private $rankInMenu;
     
     /**
      * @ORM\Column(type="string", unique=true)
@@ -72,14 +72,14 @@ class Category
         return $this;
     }
 
-    public function getRank(): ?int
+    public function getRankInMenu(): ?int
     {
-        return $this->rank;
+        return $this->rankInMenu;
     }
 
-    public function setRank(?int $rank): self
+    public function setRankInMenu(?int $rankInMenu): self
     {
-        $this->rank = $rank;
+        $this->rankInMenu = $rankInMenu;
 
         return $this;
     }
