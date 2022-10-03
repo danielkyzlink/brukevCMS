@@ -3,22 +3,20 @@
 
 {% block body %}
 
-<div class="container">
-<div class="row">
-
+<h1>{{ categoryData.name }}</h1>
+<div class="box-container">
 {% for article in categoryList %}
-<div class="col-md-6 col-lg-4">
+<div class="box">
   <a href="{{ path('showArticleDetail', { 'seoTitle': article.seoTitle }) }}">
     <div class="feature-block">
       <img src="../../uploads/img/master/{{ article.picture }}" alt="img" class="img-fluid">
-      <h4>{{ article.name|raw }}</h>
+      <h2>{{ article.name|raw }}</h2>
       <p>{{ article.perex|raw }}</p>
     </div>
   </a>
 </div>
 {% endfor %}
 
-</div>
 </div>
 
 {% endblock %}

@@ -1,29 +1,28 @@
 {% extends 'frontend/base.html.twig' %}
 
 {% block body %}
-<div class="container">
-  <section class="article">
-    <div class="hero-container">
-      <div class="article-header">
-          <div class="article-name-perex">
+<div class="box-container">
+	<div class="box color-transparent">
           	<h1>{{ article.name|raw }}</h1>
-          	<h2>{{ article.perex|raw }}</h2>
-          </div>
-          <div class="master-image">
+          	<h2>{{ article.perex|raw }}</h2>          	
+    </div>
+    <div class="box img">
           	<img src="../../uploads/img/master/{{ article.picture }}">
-          </div>
-      </div>
+    </div>
+    <div class="box100 color-transparent">
       <div class="article-text">
         {{ article.text|raw }}
       </div>
-    </div>
     <div class="date-of-created">
     {{ article.dateOfCreated|date('d. m. Y') }}
     </div>
-  </section>
+</div>
+
+
   <span id="comments"></span>
+  <div class="box100 color-transparent">
   {{ form(form) }}
-  <div class="komentare">
+
       {% for comment in comments %}
     	<div class="komentar">
           <h4>{{ comment.name }}</h4><span>{{ comment.dateOfComment|date('d. m. Y H:i') }}</span>

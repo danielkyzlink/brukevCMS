@@ -20,6 +20,12 @@ class CategoryModel
         return $category;
     }
     
+    public function showCategoryBySeoTitle($categorySeoTitle) {
+        $category = $this->em->getRepository(Category::class)
+            ->findOneBy(array('seoTitle' => $categorySeoTitle));
+        return $category;
+    }
+    
     public function saveCategory(Category $category, SeoModel $seoModel) {
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $this->em->persist($category);
@@ -46,7 +52,8 @@ class CategoryModel
         $articles = $this->em->getRepository(Article::class)
         ->findBy(
             array(
-                'category' => $categoryId
+                'category' => $categoryId,
+                'state' => 1
             )
         );  
         return count($articles);
