@@ -22,13 +22,14 @@ use App\Entity\Comment;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Model\SpaceModel;
 
 class ArticleController extends AbstractController
 {
     /**
      * @Route("/{seoTitle}", name="showArticleDetail")
      */
-    public function showArticle($seoTitle, Request $request, CommentModel $commentModel, ManagerRegistry $doctrine)
+    public function showArticle($seoTitle, Request $request, CommentModel $commentModel, ManagerRegistry $doctrine, SpaceModel $spaceModel)
     {
         
         /* zobraz koncept jen prihlasenym */
@@ -98,12 +99,13 @@ class ArticleController extends AbstractController
         }
         
         $comments = $commentModel->showComments($article);
-            
+        $space = $spaceModel;
         // vykresleni sablony s clankem dle ID
         return $this->render('frontend/article/showArticle.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
             'comments' => $comments,
+            'space' => $space,
         ]);
     }    
 }

@@ -7,6 +7,7 @@ use App\Entity\Space;
 use App\Model\SpaceModel;
 use App\Form\AddSpaceFormType;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Persistence\ManagerRegistry;
 
 class SpaceController extends AbstractController
 {
@@ -24,7 +25,7 @@ class SpaceController extends AbstractController
     /**
      * @Route("/admin/space/addSpace", name="addSpace")
      */
-    public function addSpace(SpaceModel $spaceModel, Request $request)
+    public function addSpace(SpaceModel $spaceModel, Request $request, ManagerRegistry $doctrine)
     {
         $space = new Space();
         $form = $this->createForm(AddSpaceFormType::class, $space);
@@ -32,7 +33,7 @@ class SpaceController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             $space->setState(1);
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($space);
             $entityManager->flush();
             return $this->redirectToRoute('listSpaces');
@@ -46,7 +47,7 @@ class SpaceController extends AbstractController
     /**
      * @Route("/admin/space/editSpace/{spaceId}", name="editSpace")
      */
-    public function editSpace(int $spaceId = null, SpaceModel $spaceModel, Request $request)
+    public function editSpace(int $spaceId = null, SpaceModel $spaceModel, Request $request, ManagerRegistry $doctrine)
     {
         $space = $spaceModel->getSpaceById($spaceId);
         $form = $this->createForm(AddSpaceFormType::class, $space);
@@ -54,7 +55,7 @@ class SpaceController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             $space->setState(1);
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
             $entityManager->persist($space);
             $entityManager->flush();
             return $this->redirectToRoute('listSpaces');
