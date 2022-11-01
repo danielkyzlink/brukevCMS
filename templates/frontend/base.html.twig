@@ -11,11 +11,15 @@
 
   <!-- Main Stylesheet File -->
   <link href="{{ asset('css/frontend/brukevStyle.css') }}" rel="stylesheet">
+  
+  <!-- slick -->
+  <link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick-theme.css') }}">
 </head>
 
 <body>
     <header>
-        <a href="#" class=""><img src="demo-brukev-logo.png"></a>
+        <a href="/" class=""><img src="{{ asset('brukev-logo.png') }}"></a>
   		<nav id="main-nav">
             {{ render(controller('App\\Controller\\CategoryController::showMenu')) }}
     	</nav>
@@ -41,7 +45,19 @@
 
 {% include 'frontend/footer.html.twig' %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script-->
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="{{ asset('lib/slick/slick.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).on('ready', function() {
+          $(".gallery-slickme").slick({
+            infinite: true,
+            autoplay: true,
+            slidesToShow: 4,
+            slidesToScroll: 1
+          });
+        });
+    </script>
 
   
 </body>

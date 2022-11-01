@@ -20,13 +20,20 @@ class UserFixures extends Fixture
     public function load(ObjectManager $manager)
     {
         $user = new User();
-        // $manager->persist($product);
-
-        $user->setPassword($this->passwordEncoder->encodePassword(
+        
+        $user->setEmail("testadmin@brukev.cz");
+        $user->setName("testadmin");
+        $user->setSurname("Novak");
+        $user->setNickname("boss");
+        $user->setState(1);
+        $user->setRegistrationDate(new \DateTime());
+        $user->setLastLoginDate(new \DateTime());
+        $user->setPassword($this->passwordEncoder->hashPassword(
             $user,
-            'the_new_password'
+            '123456'
          ));
         
-        // $manager->flush();
+        $manager->persist($user);
+        $manager->flush();
     }
 }

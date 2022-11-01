@@ -8,35 +8,28 @@
         <main>
             <div class="box-container">
                 <div class="box">
-                    <h1>{{ space.getArticleInSpace('Hotel').name }}</h1>
-                    {{ space.getArticleInSpace('Hotel').text|raw }}
+                    <h1>{{ space.getArticleInSpace('hp-top-left').name }}</h1>
+                    {{ space.getArticleInSpace('hp-top-left').text|raw }}
                 </div>
                 <div class="box">
-                    <h1>{{ space.getArticleInSpace('Lyzovani').name }}</h1>
-                    {{ space.getArticleInSpace('Lyzovani').text|raw }}
+                    <h1>{{ space.getArticleInSpace('hp-top-right').name }}</h1>
+                    {{ space.getArticleInSpace('hp-top-right').text|raw }}
                 </div>
                 <div class="box box100">
-                    <h1>{{ space.getArticleInSpace('Objednavky').name }}</h1>
-                    {{ space.getArticleInSpace('Objednavky').text|raw }}
+                    <h1>{{ space.getArticleInSpace('hp-bottom').name }}</h1>
+                    {{ space.getArticleInSpace('hp-bottom').text|raw }}
                 </div>
         </main>
         <div class="gallery">
             <div class="gallery-slickme">
-                <img src="img/gallery/hotel.jpg">
                 <img src="img/gallery/1.jpg">
                 <img src="img/gallery/2.jpg">
                 <img src="img/gallery/3.jpg">
                 <img src="img/gallery/4.jpg">
                 <img src="img/gallery/5.jpg">
                 <img src="img/gallery/6.jpg">
-                <img src="img/gallery/7.jpg">
-                <img src="img/gallery/9.jpg">
-                <img src="img/gallery/10.jpg">
-                <img src="img/gallery/11.jpg">
-                <img src="img/gallery/12.jpg">
             </div>
         </div>
     </div>
-
 
 {% endblock %}
