@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Model\ArticleModel;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use App\Service\TemplateSwitcher;
 use App\Model\SpaceModel;
 
 class HomepageController extends AbstractController
@@ -15,11 +16,11 @@ class HomepageController extends AbstractController
     /**
      * @Route("/", name="FEhome")
      */
-    public function showFrontendHP(ArticleModel $am, SpaceModel $spaceModel)
+    public function showFrontendHP(ArticleModel $am, SpaceModel $spaceModel, TemplateSwitcher $templateSwitcher)
     {   
         $space = $spaceModel;
         $latestArticles = $this->showLatestArticles($am, 7);
-        return $this->render('frontend/homepage/showFE.html.twig', [
+        return $this->render($templateSwitcher->switch("/homepage/showFE.html.twig"), [
             'latestArticles' => $latestArticles,
             'space' => $space,
         ]);
