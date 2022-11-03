@@ -2,12 +2,10 @@
 
           {% for item in category %}
           	<li>
-    	          {% if item.id != 1 %} {# TODO: toto by se mělo rešit spíš v modelu #}
-        	      	<a href="{{ path('category', {'seoTitle': item.seoTitle}) }}">{{ item.name }}</a>
-        	          {% if item.categories is not empty %}
-                          {% include 'frontend/category/category.html.twig' with {'category':item.categories} %}
-        	          {% endif %}
-        	      {% endif %}
+      	      	<a href="{{ path('category', {'seoTitle': item.seoTitle}) }}">{{ item.name }}</a>
+    	        {% if item.categories is not empty %}
+	                {% include 'frontend/category/category.html.twig' with {'category':item.categories} %}
+       	        {% endif %}
              </li>
           {% endfor %}
           

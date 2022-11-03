@@ -84,10 +84,8 @@ class ArticleController extends AbstractController
             ]);
         $form = $form->getForm($form);
         
-        //asi odchyd POSTu
         $form->handleRequest($request);
         
-        //formular odeslan
         if ($form->isSubmitted() && $form->isValid()) {
             
             $comment = $form->getData();
