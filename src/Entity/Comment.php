@@ -6,66 +6,44 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
- */
+#[ORM\Entity(repositoryClass: "App\Repository\CommentRepository")]
 class Comment
 {
     
     const STATE_SMAZANO = 0;
     const STATE_PUBLIKOVANO = 1;
     
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id()]
+    #[ORM\GeneratedValue()]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="text", length=255)
-     */
+    #[ORM\Column(type: "text", length: 255)]
     private $text;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: "datetime")]
     private $date_of_comment;
 
-    /**
-     * @ORM\Column(type="smallint")
-     */
+    #[ORM\Column(type: "smallint")]
     private $state;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $email;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
-     */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\User", inversedBy: "comments")]
     private $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Article", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Article", inversedBy: "comments")]
+    #[ORM\JoinColumn(nullable: false)]
     private $article;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Comment", inversedBy="comments")
-     */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Comment", inversedBy: "comments")]
     private $parent;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="parent")
-     */
+    #[ORM\OneToMany(targetEntity: "App\Entity\Comment", mappedBy: "parent")]
     private $comments;
 
 

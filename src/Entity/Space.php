@@ -5,36 +5,24 @@ namespace App\Entity;
 use App\Repository\SpaceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SpaceRepository::class)
- */
+#[ORM\Entity(repositoryClass: SpaceRepository::class)]
 class Space
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $textId;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="spaces")
-     */
+    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: "spaces")]
     private $Article;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: "integer")]
     private $state;
 
     public function getId(): ?int

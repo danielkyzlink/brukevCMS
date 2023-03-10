@@ -6,46 +6,30 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
- */
+#[ORM\Entity(repositoryClass: "App\Repository\CategoryRepository")]
 class Category
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id()]
+    #[ORM\GeneratedValue()]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
-     */
+    #[ORM\OneToMany(targetEntity: "App\Entity\Article", mappedBy: "category")]
     private $articles;    
     
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $name;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: "integer", nullable: true)]
     private $rankInMenu;
     
-    /**
-     * @ORM\Column(type="string", unique=true)
-     */
+    #[ORM\Column(type: "string", unique: true)]
     private $seoTitle;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="categories")
-     */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Category", inversedBy: "categories")]
     private $parent;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parent")
-     */
+    #[ORM\OneToMany(targetEntity: "App\Entity\Category", mappedBy: "parent")]
     private $categories;
     
     public function __construct()

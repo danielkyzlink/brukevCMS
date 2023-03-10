@@ -10,71 +10,49 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Comment;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- */
+#[ORM\Entity(repositoryClass: "App\Repository\UserRepository")]
+#[UniqueEntity(fields: ["email"], message: "There is already an account with this email")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     const STATE_USER_OK = 1;
     const STATE_USER_BLOCKED = 2;
     
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id()]
+    #[ORM\GeneratedValue()]
+    #[ORM\Column(type: "integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: "string", length: 180, unique: true)]
     private $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: "json")]
     private $roles = [];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: "string")]
     private $password;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
-     */
+    #[ORM\OneToMany(targetEntity: "App\Entity\Comment", mappedBy: "user")]
     private $comments;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: "integer")]
     private $state;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $surname;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $nickname;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: "datetime")]
     private $registrationDate;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: "datetime")]
     private $lastLoginDate;
 
     public function __construct()

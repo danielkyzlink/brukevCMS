@@ -7,71 +7,46 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Comment;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
- */
+#[ORM\Entity(repositoryClass: "App\Repository\ArticleRepository")]
 class Article
 {
     const STATE_SMAZANO = 0;
     const STATE_PUBLIKOVANO = 1;
     const STATE_REVIZE = 2;
     
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id()]
+    #[ORM\GeneratedValue()]
+    #[ORM\Column(type: "integer")]
     private $id;
     
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
-     */
+    #[ORM\ManyToOne(targetEntity: "App\Entity\Category", inversedBy: "articles")]
     private $category;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $name;
     
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $picture;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private $perex;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: "text", nullable: true)]
     private $text;
     
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: "datetime", nullable: true)]
     private $dateOfCreated;
     
-    /**
-     * @ORM\Column(type="string", unique=true)
-     */
+    #[ORM\Column(type: "string", unique: true)]
     private $seoTitle;
 
-    /**
-     * @ORM\Column(type="integer")
-     *
-     */
+    #[ORM\Column(type: "integer")]
     private $state;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article")
-     */
+    #[ORM\OneToMany(targetEntity: "App\Entity\Comment", mappedBy: "article")]
     private $comments;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Space::class, mappedBy="Article")
-     */
+    #[ORM\OneToMany(targetEntity: Space::class, mappedBy: "Article")]
     private $spaces;
     
     public function __construct()
