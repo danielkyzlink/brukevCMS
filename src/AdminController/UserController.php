@@ -3,7 +3,7 @@ namespace App\AdminController;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Entity\User;
 use App\Model\UserModel;
 
@@ -24,8 +24,8 @@ class UserController extends AbstractController
     
     /**
      * @Route("/admin/user/userToBlocked/{user}", name="userToBlocked")
-     * @IsGranted("ROLE_ADMIN", statusCode=404, message="Post not found")
      */
+    #[IsGranted('ROLE_ADMIN')]
     public function userToBlocked(User $user, UserModel $userModel){
         
         $userModel->userToBlocked($user);
@@ -35,8 +35,8 @@ class UserController extends AbstractController
     
     /**
      * @Route("/admin/user/userUnblocked/{user}", name="userUnblocked")
-     * @IsGranted("ROLE_ADMIN", statusCode=404, message="Post not found")
      */
+    #[IsGranted('ROLE_ADMIN')]
     public function userUnblocked(User $user, UserModel $userModel){
         
         $userModel->userUnblocked($user);
