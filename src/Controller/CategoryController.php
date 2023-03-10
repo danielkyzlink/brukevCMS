@@ -34,9 +34,7 @@ class CategoryController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/kategorie/{seoTitle}", name="category")
-     */
+    #[Route("/kategorie/{seoTitle}", name: "category")]
     public function showCategory(ArticleModel $am, $seoTitle, CategoryModel $cm, TemplateSwitcher $templateSwitcher)
     {
         $categoryData = $cm->showCategoryBySeoTitle($seoTitle);

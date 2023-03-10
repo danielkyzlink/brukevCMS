@@ -16,9 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class RegistrationController extends AbstractController
 {
-    /**
-     * @Route("/admin/register", name="app_register")
-     */
+    #[Route("/admin/register", name: "app_register")]
     public function register(Request $request, UserPasswordHasherInterface $passwordEncoder, LoginFormAuthenticator $authenticator, ManagerRegistry $doctrine): Response
     {
         $user = new User();
@@ -60,9 +58,7 @@ class RegistrationController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/admin/user/editUser/{userId}", name="editUser")
-     */
+    #[Route("/admin/user/editUser/{userId}", name: "editUser")]
     public function editUser(int $userId = null, Request $request, UserPasswordHasherInterface $passwordEncoder, LoginFormAuthenticator $authenticator, UserModel $userModel, ManagerRegistry $doctrine): Response
     {
         $user = $userModel->getUserById($userId);

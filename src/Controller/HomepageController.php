@@ -13,9 +13,7 @@ use App\Model\SpaceModel;
 
 class HomepageController extends AbstractController
 {
-    /**
-     * @Route("/", name="FEhome")
-     */
+    #[Route("/", name: "FEhome")]
     public function showFrontendHP(ArticleModel $am, SpaceModel $spaceModel, TemplateSwitcher $templateSwitcher)
     {   
         $space = $spaceModel;

@@ -17,9 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class CategoryController extends AbstractController
 {
-    /**
-     * @Route("/admin/category/listCategories", name="listCategories")
-     */
+    #[Route("/admin/category/listCategories", name: "listCategories")]
     public function listCategories(CategoryModel $categoryModel, ManagerRegistry $doctrine)
     {
         $categories = $doctrine->getRepository(Category::class)
@@ -42,9 +40,7 @@ class CategoryController extends AbstractController
     }
     
     
-    /**
-     * @Route("/admin/category/saveCategory/{categoryId}", requirements={"categoryId"="\d+"}, defaults={"categoryId"=null}, name="saveCategory")
-     */
+    #[Route("/admin/category/saveCategory/{categoryId}", requirements: ["categoryId"=>"\d+"], defaults: ["categoryId"=>null], name: "saveCategory")]
     public function saveCategory(int $categoryId = null, Request $request, CategoryModel $categoryModel, SeoModel $seoModel)
     {
         // vytvarim novou Category nebo nacitam stavajici podle $categoryId z URL
@@ -85,9 +81,7 @@ class CategoryController extends AbstractController
 
     }
     
-    /**
-     * @Route("/admin/category/deleteCategory/{categoryId}", name="deleteCategory")
-     */
+    #[Route("/admin/category/deleteCategory/{categoryId}", name: "deleteCategory")]
     public function deleteCategory(int $categoryId, CategoryModel $categoryModel)
     {
         $categoryModel->deleteCategory($categoryId);

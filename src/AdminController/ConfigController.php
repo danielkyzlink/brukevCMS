@@ -12,9 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ConfigController extends AbstractController
 {
-    /**
-     * @Route("/admin/config/listConfig", name="listConfig")
-     */
+    #[Route("/admin/config/listConfig", name: "listConfig")]
     public function configList(ConfigModel $configModel, Request $request) {
         $configData = $configModel->showConfig();
 

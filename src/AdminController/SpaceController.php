@@ -11,9 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class SpaceController extends AbstractController
 {
-    /**
-     * @Route("/admin/space/listSpaces", name="listSpaces")
-     */
+    #[Route("/admin/space/listSpaces", name: "listSpaces")]
     public function listSpaces(SpaceModel $spaceModel){
         $spaces = $spaceModel->showAllSpaces(); 
         // vykresleni sablony
@@ -22,9 +20,7 @@ class SpaceController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/admin/space/addSpace", name="addSpace")
-     */
+    #[Route("/admin/space/addSpace", name: "addSpace")]
     public function addSpace(SpaceModel $spaceModel, Request $request, ManagerRegistry $doctrine)
     {
         $space = new Space();
@@ -44,9 +40,7 @@ class SpaceController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/admin/space/editSpace/{spaceId}", name="editSpace")
-     */
+    #[Route("/admin/space/editSpace/{spaceId}", name: "editSpace")]
     public function editSpace(int $spaceId = null, SpaceModel $spaceModel, Request $request, ManagerRegistry $doctrine)
     {
         $space = $spaceModel->getSpaceById($spaceId);

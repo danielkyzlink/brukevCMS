@@ -21,9 +21,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class ArticleController extends AbstractController
 {
-    /**
-     * @Route("/admin/article/listArticle", name="listArticle")
-     */
+    #[Route("/admin/article/listArticle", name: "listArticle")]
     public function listArticles(ManagerRegistry $doctrine)
     {
         $articles = $doctrine->getRepository(Article::class)
@@ -42,9 +40,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/article/listTrash", name="listTrash")
-     */
+    #[Route("/admin/article/listTrash", name: "listTrash")]
     public function listTrash(ManagerRegistry $doctrine)
     {
         $articles = $doctrine->getRepository(Article::class)
@@ -58,27 +54,21 @@ class ArticleController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/admin/article/articleToTrash/{article}", name="articleToTrash")
-     */
+    #[Route("/admin/article/articleToTrash/{article}", name: "articleToTrash")]
     public function articleToTrash(Article $article, ArticleModel $articleModel, Request $request)
     {
         $articleModel->articleToTrash($article);
         return $this->redirectToRoute('listArticle');
     }
     
-    /**
-     * @Route("/admin/article/articleSetKoncept/{article}", name="articleSetKoncept")
-     */
+    #[Route("/admin/article/articleSetKoncept/{article}", name: "articleSetKoncept")]
     public function articleToKoncept(Article $article, ArticleModel $articleModel, Request $request)
     {
         $articleModel->articleToKoncept($article);
         return $this->redirectToRoute('listTrash');
     }
     
-    /**
-     * @Route("/admin/article/saveArticle/{articleId}", requirements={"articleId"="\d+"}, defaults={"articleId"=null}, name="saveArticle")
-     */
+    #[Route("/admin/article/saveArticle/{articleId}", requirements: ["articleId"=>"\d+"], defaults: ["articleId"=>null], name: "saveArticle")]
     public function saveArticle(int $articleId = null, Request $request, ArticleModel $articleModel, FileUploadModel $fileUpload, SeoModel $seoModel)
     {   
         // TODO mela by se vyresit kontrola existence articlu s danym ID
@@ -137,9 +127,7 @@ class ArticleController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/admin/article/fileUpload", name="fileUpload", methods={"POST"})
-     */
+    #[Route("/admin/article/fileUpload", name: "fileUpload", methods: ["POST"])]
     public function fileUpload(Request $request, FileUploadModel $fileUpload)
     {
         $images = $request->files->all();

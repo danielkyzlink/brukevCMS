@@ -25,9 +25,7 @@ use App\Service\TemplateSwitcher;
 
 class ArticleController extends AbstractController
 {
-    /**
-     * @Route("/{seoTitle}", name="showArticleDetail")
-     */
+    #[Route("/{seoTitle}", name: "showArticleDetail")]
     public function showArticle($seoTitle, Request $request, CommentModel $commentModel, ManagerRegistry $doctrine, SpaceModel $spaceModel, TemplateSwitcher $templateSwitcher)
     {
         

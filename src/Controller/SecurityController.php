@@ -9,9 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/admin/login", name="app_login")
-     */
+    #[Route("/admin/login", name: "app_login")]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
@@ -21,10 +19,8 @@ class SecurityController extends AbstractController
 
         return $this->render('admin/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
-    
-    /**
-     * @Route("/admin/logout", name="app_logout")
-     */
+
+    #[Route("/admin/logout", name: "app_logout")]
     public function logout()
     {
         // controller can be blank: it will never be executed!

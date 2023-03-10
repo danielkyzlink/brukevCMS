@@ -9,9 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CommentController extends AbstractController
 {
-    /**
-     * @Route("admin/comment/listComments", name="listComments")
-     */
+    #[Route("admin/comment/listComments", name: "listComments")]
     public function listComments(CommentModel $commentModel)
     {
         $comments = $commentModel->showAllComments();
@@ -21,18 +19,14 @@ class CommentController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/admin/comment/commentToTrash/{comment}", name="commentToTrash")
-     */
+    #[Route("/admin/comment/commentToTrash/{comment}", name: "commentToTrash")]
     public function commentToTrash(Comment $comment, CommentModel $commentModel, Request $request)
     {
         $commentModel->commentToTrash($comment);
         return $this->redirectToRoute('listComments');
     }
     
-    /**
-     * @Route("/admin/comment/commentToPublic/{comment}", name="commentToPublic")
-     */
+    #[Route("/admin/comment/commentToPublic/{comment}", name: "commentToPublic")]
     public function commentToPublic(Comment $comment, CommentModel $commentModel, Request $request)
     {
         $commentModel->commentToPublic($comment);

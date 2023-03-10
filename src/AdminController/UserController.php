@@ -9,9 +9,7 @@ use App\Model\UserModel;
 
 class UserController extends AbstractController
 {
-    /**
-     * @Route("/admin/user/listUsers", name="listUsers")
-     */
+    #[Route("/admin/user/listUsers", name: "listUsers")]
     public function listUsers(UserModel $userModel){
         
         $users = $userModel->showAllUsers(); 
@@ -22,9 +20,7 @@ class UserController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/admin/user/userToBlocked/{user}", name="userToBlocked")
-     */
+    #[Route("/admin/user/userToBlocked/{user}", name: "userToBlocked")]
     #[IsGranted('ROLE_ADMIN')]
     public function userToBlocked(User $user, UserModel $userModel){
         
@@ -33,9 +29,7 @@ class UserController extends AbstractController
         return $this->redirectToRoute('listUsers');
     }
     
-    /**
-     * @Route("/admin/user/userUnblocked/{user}", name="userUnblocked")
-     */
+    #[Route("/admin/user/userUnblocked/{user}", name: "userUnblocked")]
     #[IsGranted('ROLE_ADMIN')]
     public function userUnblocked(User $user, UserModel $userModel){
         
