@@ -21,6 +21,7 @@ class FileUploadModel
      * @return string nazev obrazku
      */
     public function saveImage($images, $type="OTHER") {
+
         if (is_array($images)){
             $image = $images['file'];
         }else{
@@ -29,12 +30,13 @@ class FileUploadModel
         
         if ($type == "MASTER"){
             $dirName = 'uploads/img/master/';
+        }elseif($type == "GALLERY"){
+            $dirName = 'uploads/gallery/original';
         }else{
             $dirName = 'uploads/img/';
         }
-        
         $this->originalFileName = $image->getClientOriginalName();
-        $pictureName = $this->fileExistsAndRename($dirName, $image->getClientOriginalName());    
+        $pictureName = $this->fileExistsAndRename($dirName, $image->getClientOriginalName());
         
         // Move the file to the directory where brochures are stored
         try {
@@ -55,7 +57,7 @@ class FileUploadModel
      */
     public function fileExistsAndRename($dirName, $fileName, $nConst = 0) {
         $nConst += 1;
-        if (!$this->totalFileName){
+        if ($nConst == 1){
             $this->totalFileName = $this->originalFileName;
         }
         
