@@ -5,8 +5,10 @@ controllers:
     type: attribute
 
 adminControllers:
-    resource: ../src/AdminController/
-    type: annotation
+    resource:
+        path: ../src/AdminController/
+        namespace: App\AdminController
+    type: attribute
 
 kernel:
     resource: ../src/Kernel.php
