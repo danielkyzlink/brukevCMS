@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Category;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -105,7 +106,11 @@ class ArticleController extends AbstractController
                 'class' => Category::class,
                 'choice_label' => 'name',
             ])
-            ->add('save', SubmitType::class, ['label' => 'Create Task']);
+            ->add('Author', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'userInfo',
+            ])
+        ->add('save', SubmitType::class, ['label' => 'Create Task']);
             $form = $form->getForm($form);
         
         //asi odchyd POSTu

@@ -12,25 +12,34 @@
     <div class="box100 color-transparent">
       <div class="article-text">
         {{ article.text|raw }}
+
+        {% if article.author %}
+          <div class="author">
+            <span class="author-name">{{ article.author.name }} {{ article.author.surname }} | </span>
+            <span class="author-email">{{ article.author.email }}</span>
+          </div>
+        {% endif %}
       </div>
-    <div class="date-of-created">
-    {{ article.dateOfCreated|date('d. m. Y') }}
+      {% if zobrazDatum %}
+          <div class="date-of-created">
+            {{ article.dateOfCreated|date('d. m. Y') }}
+          </div>
+      {% endif %}
     </div>
 </div>
 
+  {% if form %}
+      <span id="comments"></span>
+      <div class="box100 color-transparent">
+      {{ form(form) }}
 
-  <span id="comments"></span>
-  <div class="box100 color-transparent">
-  {{ form(form) }}
-
-      {% for comment in comments %}
-    	<div class="komentar">
-          <h4>{{ comment.name }}</h4><span>{{ comment.dateOfComment|date('d. m. Y H:i') }}</span>
-          <p>{{ comment.text }}</p>
-          <div class="div-for-anchor" id="commentId-{{ comment.id }}"></div>
-    	</div>
-      {% endfor %}
-  </div>
-  
-</div>
+          {% for comment in comments %}
+            <div class="komentar">
+              <h4>{{ comment.name }}</h4><span>{{ comment.dateOfComment|date('d. m. Y H:i') }}</span>
+              <p>{{ comment.text }}</p>
+              <div class="div-for-anchor" id="commentId-{{ comment.id }}"></div>
+            </div>
+          {% endfor %}
+      </div>
+  {% endif %}
 {% endblock %}
