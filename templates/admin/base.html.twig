@@ -40,15 +40,18 @@
                 <ul>
     				<li><i class="fas fa-igloo"></i><a href="{{ path('home') }}">Domů</a></li>
     			</ul>
+				<h3>Články</h3>
     			<ul>
     				<li><i class="far fa-file-alt"></i><a href="{{ path('listArticle') }}">Zobraz články</a></li>
-    				<li><i class="far fa-trash-alt"></i><a href="{{ path('listTrash') }}">Koš</a></li>
         			<li><i class="far fa-file"></i><a href="{{ path('saveArticle') }}">Nový članek</a></li>
+					<li><i class="far fa-trash-alt"></i><a href="{{ path('listTrash') }}">Koš</a></li>
         		</ul>
+				<h3>Kategorie</h3>
         		<ul>
     				<li><i class="far fa-file-alt"></i><a href="{{ path('listCategories') }}">Zobraz kategorie</a></li>
     				<li><i class="far fa-file"></i><a href="{{ path('saveCategory') }}">Nová kategorie</a></li>
         		</ul>
+				<h3>Ostatní nastavení</h3>
         		<ul>
     				<li><i class="far fa-comment"></i><a href="{{ path('listComments') }}">Zobraz komentáře</a></li>
         		</ul>
@@ -58,14 +61,15 @@
         		<ul>
     				<li><i class="fas fa-cogs"></i><a href="{{ path('listConfig') }}">Nastavení</a></li>
         		</ul>
+				<h3>Uživatelé</h3>
     			<ul>
         			{% if not is_granted('ROLE_USER') %}
         				<li><i class="fas fa-sign-in-alt"></i><a href="{{ path('app_login') }}">LOGIN</a></li>
         			{% endif %}
+					<li><i class="far fa-address-card"></i><a href="{{ path('listUsers') }}">Uživatelé</a></li>
         			{% if is_granted('ROLE_USER') %}
-        				<li><i class="fas fa-sign-out-alt"></i><a href="{{ path('app_logout') }}">LOGOUT</a></li>
+        				<li><i class="fas fa-sign-out-alt"></i><a href="{{ path('app_logout') }}">Odhlásit se</a></li>
                     {% endif %}
-        			<li><i class="far fa-address-card"></i><a href="{{ path('listUsers') }}">Uživatelé</a></li>
 				</ul>
             {% endblock %}
         </nav>

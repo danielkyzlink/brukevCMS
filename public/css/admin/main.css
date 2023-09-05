@@ -33,6 +33,10 @@ nav {
 	color: #7AB4DD;
 }
 
+nav h3 {
+	padding-left: 40px;
+}
+
 nav * {
 	color: #ddd;	
 }
@@ -44,11 +48,13 @@ nav li {
 
 nav li a {
 	text-decoration: none;
+	font-size: 16px;
 }
 
 nav li i {
 	width: 30px;
 	text-align: center;
+	font-size: 16px;
 }
 
 table {
@@ -90,4 +96,12 @@ main.login-page form {
 
 main.login-page form input {
 	margin-bottom: 15px;
+}
+button {
+	margin-bottom: 20px !important;
+}
+
+button a,
+button a:hover{
+	color: #fff;
 }
