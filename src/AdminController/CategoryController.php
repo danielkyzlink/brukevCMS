@@ -63,15 +63,13 @@ class CategoryController extends AbstractController
         $form = $form->getForm($form);
         
         $form->handleRequest($request);
-        
-
 
         //formular odeslan
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
             
             $categoryModel->saveCategory($category, $seoModel);
-            
+            $this->addFlash('success', 'Kategorie byla úspěšně uložena.');
         }
         
         // vykresleni sablony s formularem

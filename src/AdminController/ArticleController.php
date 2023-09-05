@@ -110,7 +110,7 @@ class ArticleController extends AbstractController
                 'class' => User::class,
                 'choice_label' => 'userInfo',
             ])
-        ->add('save', SubmitType::class, ['label' => 'Create Task']);
+            ->add('save', SubmitType::class, ['label' => 'Create Task']);
             $form = $form->getForm($form);
         
         //asi odchyd POSTu
@@ -123,9 +123,8 @@ class ArticleController extends AbstractController
             $picture = $form['picture']->getData();
             
             $articleModel->saveArticle($article, $picture, $fileUpload, $seoModel);
-
+            $this->addFlash('success', 'Článek byl úspěšně uložen.');
         }
-            
         // vykresleni sablony s formularem
         return $this->render('admin/article/saveArticle.html.twig', [
             'form' => $form->createView(),
