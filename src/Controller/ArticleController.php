@@ -36,16 +36,30 @@ class ArticleController extends AbstractController
         }else{
             $statesArray  = array(1);
         }
-        
+
         $article = $doctrine->getRepository(Article::class)
             ->findOneBy(array(
                 'seoTitle' => $seoTitle,
                 'state' => $statesArray,
             ));
-        
+
         if (!$article) {
             throw $this->createNotFoundException(
                 'No product found for id '.$seoTitle
+            );
+        }
+
+        if (($article->getRoles() != null || $article->getRoles() != []) && $this->getUser()){
+            $roleUser = $this->getUser()->getRoles();
+            $roleArticle = $article->getRoles();
+            if (!count(array_intersect($roleArticle, $roleUser)) > 0) {
+                throw $this->createNotFoundException(
+                    'Neoprávněný přístup k článku '.$seoTitle
+                );
+            }
+        }else{
+            throw $this->createNotFoundException(
+                'Neoprávněný přístup k článku '.$seoTitle
             );
         }
 

@@ -110,6 +110,13 @@ class ArticleController extends AbstractController
                 'class' => User::class,
                 'choice_label' => 'userInfo',
             ])
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Pouze pro přihlášené návštěvníky' => 'WEB_USER',
+                ],
+                'multiple' => true,
+                'expanded' => true,
+            ])
             ->add('save', SubmitType::class, ['label' => 'Create Task']);
             $form = $form->getForm($form);
         

@@ -28,6 +28,14 @@
   		<nav id="main-nav">
             {{ render(controller('App\\Controller\\CategoryController::showMenu')) }}
     	</nav>
+        <div>
+            {% if app.user %}
+                <a href="{{ path('app_logout') }}" class="btn btn-lg btn-primary">Odhlásit se</a>
+            {% else %}
+                <a href="{{ path('app_login', {'webLogin': true}) }}" class="btn btn-lg btn-primary">Přihlásit se</a>
+            {% endif %}
+
+        </div>
     </header>
 
 

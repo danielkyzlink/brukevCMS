@@ -51,6 +51,9 @@ class Article
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $author = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $roles = [];
     
     public function __construct()
     {
@@ -230,6 +233,18 @@ class Article
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

@@ -9,15 +9,19 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route("/admin/login", name: "app_login")]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    #[Route("/admin/login/{webLogin}", name: "app_login", defaults: ["webLogin" => false])]
+    public function login(AuthenticationUtils $authenticationUtils, $webLogin = false): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('admin/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        if($webLogin){
+            return $this->render('admin/security/webLogin.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        }else{
+            return $this->render('admin/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        }
     }
 
     #[Route("/admin/logout", name: "app_logout")]
