@@ -49,18 +49,20 @@ class ArticleController extends AbstractController
             );
         }
 
-        if (($article->getRoles() != null || $article->getRoles() != []) && $this->getUser()){
-            $roleUser = $this->getUser()->getRoles();
-            $roleArticle = $article->getRoles();
-            if (!count(array_intersect($roleArticle, $roleUser)) > 0) {
+        if (($article->getRoles() != null || $article->getRoles() != [])){
+            if($this->getUser()){
+                $roleUser = $this->getUser()->getRoles();
+                $roleArticle = $article->getRoles();
+                if (!count(array_intersect($roleArticle, $roleUser)) > 0) {
+                    throw $this->createNotFoundException(
+                        'Neoprávněný přístup k článku '.$seoTitle
+                    );
+                }
+            }else{
                 throw $this->createNotFoundException(
                     'Neoprávněný přístup k článku '.$seoTitle
                 );
             }
-        }else{
-            throw $this->createNotFoundException(
-                'Neoprávněný přístup k článku '.$seoTitle
-            );
         }
 
         if ($configModel->getConfigParameter("komentare")) {
