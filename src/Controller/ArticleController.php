@@ -54,14 +54,10 @@ class ArticleController extends AbstractController
                 $roleUser = $this->getUser()->getRoles();
                 $roleArticle = $article->getRoles();
                 if (!count(array_intersect($roleArticle, $roleUser)) > 0) {
-                    throw $this->createNotFoundException(
-                        'Neoprávněný přístup k článku '.$seoTitle
-                    );
+                    return $this->render($templateSwitcher->switch("/article/noAccess.html.twig"));
                 }
             }else{
-                throw $this->createNotFoundException(
-                    'Neoprávněný přístup k článku '.$seoTitle
-                );
+                return $this->render($templateSwitcher->switch("/article/noAccess.html.twig"));
             }
         }
 
