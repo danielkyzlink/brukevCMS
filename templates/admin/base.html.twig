@@ -75,6 +75,11 @@
         </nav>
 
         <main class="col-xs-9">
+			{% for flashMessage in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ flashMessage }}
+				</div>
+			{% endfor %}
             {% block body %}{% endblock %}
         </main>
     </body>
