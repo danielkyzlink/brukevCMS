@@ -8,6 +8,7 @@ use App\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Category;
@@ -94,6 +95,13 @@ class ArticleController extends AbstractController
         
             if($articleId){
                 $form->add('picture', FileType::class, array('mapped' => false, 'required' => false, 'help' => $article->getPicture()));
+                if($article->getPicture() != "") {
+                    $form->add('deletePicture', CheckboxType::class, [
+                        'label' => 'Smazat obrázek',
+                        'required' => false,
+                        'mapped' => false,
+                    ]);
+                }
             }else{
                 $form->add('picture', FileType::class, array('required' => false));
             };
@@ -127,10 +135,21 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $article = $form->getData();
+
+            $deletePicture = false;
+            if (isset($form['deletePicture'])) {
+                if ($form['deletePicture']->getData()) {
+                    $deletePicture = true;
+                }
+            }
+
             $picture = $form['picture']->getData();
-            
-            $articleModel->saveArticle($article, $picture, $fileUpload, $seoModel);
+
+            $articleModel->saveArticle($article, $picture, $fileUpload, $seoModel, $deletePicture);
             $this->addFlash('success', 'Článek byl úspěšně uložen.');
+
+            // Přesměrování na stejnou stránku
+            return $this->redirectToRoute('saveArticle', ['articleId' => $articleId]);
         }
         // vykresleni sablony s formularem
         return $this->render('admin/article/saveArticle.html.twig', [

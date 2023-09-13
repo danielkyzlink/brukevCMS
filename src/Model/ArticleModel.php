@@ -59,15 +59,20 @@ class ArticleModel
         $this->em->flush();
     }
 
-    public function saveArticle(Article $article, object $picture = null, FileUploadModel $fileUpload, SeoModel $seoModel) {
+    public function saveArticle(Article $article, object $picture = null, FileUploadModel $fileUpload, SeoModel $seoModel, bool $deletePicture = false) {
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $this->em->persist($article);
         
         //uložení obrázku        
-        if ($picture){
-            $pictureName = $fileUpload->saveImage($picture, "MASTER");            
+        if ($picture) {
+            $pictureName = $fileUpload->saveImage($picture, "MASTER");
             //nastaveni jmena obrazku
             $article->setPicture($pictureName);
+        }
+
+        if($deletePicture){
+            $article->setPicture("");
+            //TODO: tady by se ten obrazek mel smazat i z disku
         }
         
         //set date
