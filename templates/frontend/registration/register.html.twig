@@ -7,6 +7,10 @@
 
     {{ form(registrationForm) }}
 
+    {% if not app.user %}
+        <a href="{{ path('app_login', {'webLogin': true}) }}" class="register-link">Již jsem registrovaný/á a chci se přihlásit</a>
+    {% endif %}
+
 {% endblock %}
 
 
