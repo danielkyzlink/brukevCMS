@@ -17,7 +17,7 @@ class LostPasswordModel
         $this->em = $entityManager;
     }
 
-    public function addLostPassword(LostPassword $lostPassword, User $user, MailerInterface $mailer, Request $request) {
+    public function addLostPassword(LostPassword $lostPassword, User $user, MailerInterface $mailer) {
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $this->em->persist($lostPassword);
         $hash = bin2hex(random_bytes(32));
@@ -34,6 +34,7 @@ class LostPasswordModel
 
         $this->em->flush();
 
+        $request = Request::createFromGlobals();
         $email = (new Email())
             ->from('info@brukev.cz')
             ->to($lostPassword->getEmail())
