@@ -394,6 +394,20 @@ footer .footer-box ul {
 }
 /* ------------------------------- !!!end of FOOTER ------------------------------- */
 
+/* ------------------------------- ARTICLE ------------------------------- */
+.article-text img + p.alt-popisek {
+	font-style: italic;
+	font-size: 15px;
+	color: #777;
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+.article-text .img-alt-popisek {
+	width: max-content;
+}
+/* ------------------------------- !!!end of ARTICLE ------------------------------- */
+
 /* ------------------------------- SLICK SLIDER ------------------------------- */
     .slider {
         width: 50%;

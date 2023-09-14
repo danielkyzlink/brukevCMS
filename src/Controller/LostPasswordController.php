@@ -100,6 +100,7 @@ class LostPasswordController extends AbstractController
             );
             $lostPasswordModel->setNewPassword($user, $passwordHash);
             $lostPasswordModel->setDateRenewed($hash);
+            $this->addFlash('success', 'Heslo bylo úspěšně změněno.');
         }
 
         return $this->render("/frontend/lostPassword/renewPassword.html.twig", [

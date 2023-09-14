@@ -38,10 +38,6 @@
         </div>
     </header>
 
-
-
-
-  
 <div class="main-container">
 {% for message in app.flashes('success') %}
     <div class="alert alert-success" role="alert">
@@ -72,6 +68,7 @@
         });
     </script>
 
+{% block scripts %}{% endblock %}
   
 </body>
 </html>

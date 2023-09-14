@@ -43,3 +43,15 @@
       </div>
   {% endif %}
 {% endblock %}
+
+{% block scripts %}
+    <script>
+        $(".article-text img").each(function(){
+            let popisek = $(this).attr("alt");
+            if (popisek != ""){
+                $(this).wrap("<div class=img-alt-popisek></div>");
+                $("<p class='alt-popisek'>" + popisek + "</p>").insertAfter(this);
+            }
+        });
+    </script>
+{% endblock %}
