@@ -105,3 +105,13 @@ button a,
 button a:hover{
 	color: #fff;
 }
+
+/* --- editContents --- */
+.editContents label {
+	width: 170px;
+}
+
+.editContents input {
+	display: inline-block;
+	width: 350px;
+}
