@@ -47,6 +47,7 @@ class ContentPieceController extends AbstractController
                 'label' => $row->getName(),
                 'data' => $row->getText(),
                 'attr' => ['class' => $class],
+                'required' => false,
             ));
         }
         $form->add('save', SubmitType::class, ['label' => 'Ulož změny']);
@@ -57,6 +58,8 @@ class ContentPieceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $contentsData = $form->getData();
             $contentPieceModel->saveContens($contentsData);
+            $this->addFlash('success', 'Změny uloženy.');
+            return $this->redirect($request->getUri());
         }
 
 
