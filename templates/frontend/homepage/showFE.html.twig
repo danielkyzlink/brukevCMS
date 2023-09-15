@@ -19,6 +19,12 @@
                     <h1>{{ space.getArticleInSpace('hp-bottom').name }}</h1>
                     {{ space.getArticleInSpace('hp-bottom').text|raw }}
                 </div>
+
+                {# ukázaka práce s ContentPiece #}
+                {{ klubContents['1'].getText() }}{# obsah nadpis #}
+
+                {{ klubContents['14'].getText()|raw }}{# obsah nadpis #}
+            </div>
         </main>
         <div class="gallery">
             <div class="gallery-slickme">

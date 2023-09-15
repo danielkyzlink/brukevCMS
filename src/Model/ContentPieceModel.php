@@ -20,4 +20,12 @@ class ContentPieceModel
             $this->em->flush();
         }
     }
+
+    public function showContentsBySection(string $section) {
+        $contents = $this->em
+            ->getRepository(ContentPiece::class)
+            ->findBy(['section' => $section]);
+
+        return $contents;
+    }
 }

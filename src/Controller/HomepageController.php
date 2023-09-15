@@ -2,6 +2,7 @@
 // src/Controller/Article.php
 namespace App\Controller;
 
+use App\Model\ContentPieceModel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,13 +15,22 @@ use App\Model\SpaceModel;
 class HomepageController extends AbstractController
 {
     #[Route("/", name: "FEhome")]
-    public function showFrontendHP(ArticleModel $am, SpaceModel $spaceModel, TemplateSwitcher $templateSwitcher)
+    public function showFrontendHP(ArticleModel $am, SpaceModel $spaceModel, TemplateSwitcher $templateSwitcher, ContentPieceModel $contentPieceModel)
     {   
         $space = $spaceModel;
         $latestArticles = $this->showLatestArticles($am, 7);
+        $klubContents = $contentPieceModel->showContentsBySection('klub');
+
+        //nastaveni klicu dle id contentu TODO:nabizi se prodat textId
+        $klubContentsNiceKeys = [];
+        foreach ($klubContents as $klic => $hodnota) {
+            $klubContentsNiceKeys[$hodnota->getId()] = $hodnota;
+        }
+
         return $this->render($templateSwitcher->switch("/homepage/showFE.html.twig"), [
             'latestArticles' => $latestArticles,
             'space' => $space,
+            'klubContents' => $klubContentsNiceKeys,
         ]);
     }
     
