@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 
-use App\Entity\Article;
+//use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
 
 class SeoModel
@@ -12,7 +12,7 @@ class SeoModel
         $this->em = $entityManager;
     }
     
-    public function createSeoTitle(String $nameOfArticle, int $iterace = 0) {
+    public function createSeoTitle(String $nameOfArticle, $entita = \App\Entity\Article::class, int $iterace = 0) {
         if ($iterace == 0){
             $append = "";
         }else{
@@ -112,7 +112,7 @@ class SeoModel
         $seoTitle = preg_replace('~[^-a-zA-Z0-9_]+~', '', $seoTitle); //vyhodi skarede znaky binec
         
         $article = $this->em
-        ->getRepository(Article::class)
+        ->getRepository($entita)
         ->findOneBy(array('seoTitle' => $seoTitle));
         
         if (!$article) {

@@ -32,7 +32,7 @@ class CategoryModel
                 
         //set seoTitle
         if(!$category->getSeoTitle()){
-            $category->setSeoTitle($seoModel->createSeoTitle($category->getName()));
+            $category->setSeoTitle($seoModel->createSeoTitle($category->getName(), \App\Entity\Category::class));
         }
                 
         $this->em->flush();
