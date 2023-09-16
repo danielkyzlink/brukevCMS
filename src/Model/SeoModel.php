@@ -119,7 +119,7 @@ class SeoModel
             return $seoTitle;
         }else{
             $iterace += 1;
-            return $this->createSeoTitle($nameOfArticle, $iterace);
+            return $this->createSeoTitle($nameOfArticle, $entita, $iterace);
         }
     }
 }
