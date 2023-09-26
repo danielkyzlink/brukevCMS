@@ -9,14 +9,12 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Model\ArticleModel;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
-use App\Model\SpaceModel;
 
 class HomepageController extends AbstractController
 {
     #[Route("/", name: "FEhome")]
-    public function showFrontendHP(ArticleModel $am, SpaceModel $spaceModel, ContentPieceModel $contentPieceModel)
+    public function showFrontendHP(ArticleModel $am, ContentPieceModel $contentPieceModel)
     {   
-        $space = $spaceModel;
         $latestArticles = $this->showLatestArticles($am, 7);
         $klubContents = $contentPieceModel->showContentsBySection('klub');
 
@@ -28,7 +26,6 @@ class HomepageController extends AbstractController
 
         return $this->render("frontend/homepage/showFE.html.twig", [
             'latestArticles' => $latestArticles,
-            'space' => $space,
             'klubContents' => $klubContentsNiceKeys,
         ]);
     }

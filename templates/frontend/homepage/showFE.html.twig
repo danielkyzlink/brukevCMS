@@ -7,20 +7,7 @@
         </div>
         <main>
             <div class="box-container">
-                <div class="box">
-                    <h1>{{ space.getArticleInSpace('hp-top-left').name }}</h1>
-                    {{ space.getArticleInSpace('hp-top-left').text|raw }}
-                </div>
-                <div class="box">
-                    <h1>{{ space.getArticleInSpace('hp-top-right').name }}</h1>
-                    {{ space.getArticleInSpace('hp-top-right').text|raw }}
-                </div>
-                <div class="box box100">
-                    <h1>{{ space.getArticleInSpace('hp-bottom').name }}</h1>
-                    {{ space.getArticleInSpace('hp-bottom').text|raw }}
-                </div>
-
-                {# ukázaka práce s ContentPiece #}
+                {# ukázaka práce s ContentPices #}
                 {{ klubContents['1'].getText() }}{# obsah nadpis #}
 
                 {{ klubContents['14'].getText()|raw }}{# obsah nadpis #}

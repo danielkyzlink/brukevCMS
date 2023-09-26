@@ -6,7 +6,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Category;
 use App\Entity\Article;
-use App\Entity\Space;
 
 class AppFixtures extends Fixture
 {
@@ -71,30 +70,6 @@ class AppFixtures extends Fixture
         $articleHpBottom->setCategory($category);
         
         $manager->persist($articleHpBottom);
-        
-        $spaceHpTopLeft = new Space();
-        $spaceHpTopLeft->setName("HP nahore vlevo");
-        $spaceHpTopLeft->setTextId("hp-top-left");
-        $spaceHpTopLeft->setState(1);
-        $spaceHpTopLeft->setArticle($articleHpTopLeft);
-        
-        $manager->persist($spaceHpTopLeft);
-        
-        $spaceHpTopRight = new Space();
-        $spaceHpTopRight->setName("HP nahore vpravo");
-        $spaceHpTopRight->setTextId("hp-top-right");
-        $spaceHpTopRight->setState(1);
-        $spaceHpTopRight->setArticle($articleHpTopRight);
-        
-        $manager->persist($spaceHpTopRight);
-        
-        $spaceHpBottom = new Space();
-        $spaceHpBottom->setName("HP dole");
-        $spaceHpBottom->setTextId("hp-bottom");
-        $spaceHpBottom->setState(1);
-        $spaceHpBottom->setArticle($articleHpBottom);
-        
-        $manager->persist($spaceHpBottom);
         
         $manager->flush();
     }

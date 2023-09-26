@@ -46,9 +46,6 @@ class Article
     #[ORM\OneToMany(targetEntity: "App\Entity\Comment", mappedBy: "article")]
     private $comments;
 
-    #[ORM\OneToMany(targetEntity: Space::class, mappedBy: "Article")]
-    private $spaces;
-
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $author = null;
 
@@ -60,9 +57,8 @@ class Article
         $this->setState(self::STATE_REVIZE);
         $this->setSeoTitle("");
         $this->comments = new ArrayCollection();
-        $this->spaces = new ArrayCollection();
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,36 +185,6 @@ class Article
             // set the owning side to null (unless already changed)
             if ($comment->getArticle() === $this) {
                 $comment->setArticle(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Space>
-     */
-    public function getSpaces(): Collection
-    {
-        return $this->spaces;
-    }
-
-    public function addSpace(Space $space): self
-    {
-        if (!$this->spaces->contains($space)) {
-            $this->spaces[] = $space;
-            $space->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSpace(Space $space): self
-    {
-        if ($this->spaces->removeElement($space)) {
-            // set the owning side to null (unless already changed)
-            if ($space->getArticle() === $this) {
-                $space->setArticle(null);
             }
         }
 
