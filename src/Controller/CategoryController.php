@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Model\ArticleModel;
 use App\Repository\CategoryRepository;
 use App\Model\CategoryModel;
-use App\Service\TemplateSwitcher;
 
 class CategoryController extends AbstractController
 {
@@ -18,7 +17,7 @@ class CategoryController extends AbstractController
         $this->categoryRepository = $categoryRepository;
     }
     
-    public function showMenu(TemplateSwitcher $templateSwitcher)
+    public function showMenu()
     {   
         $categories = $this->categoryRepository->findByParent(null);
         
@@ -29,13 +28,13 @@ class CategoryController extends AbstractController
         }
         
         // vykresleni menu categorii
-        return $this->render($templateSwitcher->switch("/category/category.html.twig"), [
+        return $this->render("frontend/category/category.html.twig", [
             'category' => $categories,
         ]);
     }
     
     #[Route("/kategorie/{seoTitle}", name: "category")]
-    public function showCategory(ArticleModel $am, $seoTitle, CategoryModel $cm, TemplateSwitcher $templateSwitcher)
+    public function showCategory(ArticleModel $am, $seoTitle, CategoryModel $cm)
     {
         $categoryData = $cm->showCategoryBySeoTitle($seoTitle);
         $data = $am->showArticleByCategory($seoTitle);
@@ -43,7 +42,7 @@ class CategoryController extends AbstractController
             $articleSeoTitle = $data[0]->getSeoTitle();
             return $this->redirectToRoute('showArticleDetail', ['seoTitle' => $articleSeoTitle]);
         }
-        return $this->render($templateSwitcher->switch("/category/categoryList.html.twig"), [
+        return $this->render("frontend/category/categoryList.html.twig", [
             'categoryList' => $data,
             'categoryData' => $categoryData
         ]);

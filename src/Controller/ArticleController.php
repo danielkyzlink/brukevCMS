@@ -22,12 +22,11 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Model\SpaceModel;
-use App\Service\TemplateSwitcher;
 
 class ArticleController extends AbstractController
 {
     #[Route("/{seoTitle}", name: "showArticleDetail")]
-    public function showArticle($seoTitle, Request $request, CommentModel $commentModel, ManagerRegistry $doctrine, SpaceModel $spaceModel, TemplateSwitcher $templateSwitcher, ConfigModel $configModel)
+    public function showArticle($seoTitle, Request $request, CommentModel $commentModel, ManagerRegistry $doctrine, SpaceModel $spaceModel, ConfigModel $configModel)
     {
         
         /* zobraz koncept jen prihlasenym */
@@ -54,10 +53,10 @@ class ArticleController extends AbstractController
                 $roleUser = $this->getUser()->getRoles();
                 $roleArticle = $article->getRoles();
                 if (!count(array_intersect($roleArticle, $roleUser)) > 0) {
-                    return $this->render($templateSwitcher->switch("/article/noAccess.html.twig"));
+                    return $this->render("frontend/article/noAccess.html.twig");
                 }
             }else{
-                return $this->render($templateSwitcher->switch("/article/noAccess.html.twig"));
+                return $this->render("frontend/article/noAccess.html.twig");
             }
         }
 
@@ -111,7 +110,7 @@ class ArticleController extends AbstractController
 
         $space = $spaceModel;
         // vykresleni sablony s clankem dle ID
-        return $this->render($templateSwitcher->switch("/article/showArticle.html.twig"), [
+        return $this->render("frontend/article/showArticle.html.twig", [
             'article' => $article,
             'form' => isset($form) ? $form->createView() : NULL,
             'comments' => isset($comments) ? $comments: NULL,
