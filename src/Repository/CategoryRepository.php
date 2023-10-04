@@ -56,7 +56,8 @@ class CategoryRepository extends ServiceEntityRepository
         }else{
             $temp = $temp->andWhere('c.parent is null');
         }
-        return $temp->getQuery()
-        ->getResult();
+
+        $temp = $temp->orderBy('c.rankInMenu', 'ASC');
+        return $temp->getQuery()->getResult();
     }
 }

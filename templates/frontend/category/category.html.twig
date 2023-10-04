@@ -1,4 +1,9 @@
         <ul>
+            {# vytvorila umela intelginece, a je to takova docasna znouzectnost #}
+            {% if category is iterable and category|default([]) is same as(category) %}
+                {% set category = category|default([])|sort((a, b) => a.rankInMenu > b.rankInMenu ? 1 : -1) %}
+            {% endif %}
+            {# konec UI #}
 
           {% for item in category %}
           	<li>
@@ -8,5 +13,4 @@
        	        {% endif %}
              </li>
           {% endfor %}
-          
-          </ul>      
+        </ul>
