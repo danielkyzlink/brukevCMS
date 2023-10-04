@@ -40,12 +40,21 @@ class CategoryModel
     }
     
     public function deleteCategory(int $categoryId) {
-        if ($this->countArticlesInCategory($categoryId) == 0){
-            $category = $this->em->getRepository(Category::class)
-                ->find($categoryId);
-            $this->em->remove($category);
-            $this->em->flush();
+        $articles = $this->em->getRepository(Article::class)
+            ->findBy(
+                array(
+                    'category' => $categoryId,
+                )
+            );
+        foreach ($articles as $article){
+            $article->setCategory(null);
         }
+        $this->em->flush();
+
+        $category = $this->em->getRepository(Category::class)
+                ->find($categoryId);
+        $this->em->remove($category);
+        $this->em->flush();
     }
 
     public function countArticlesInCategory(int $categoryId) {

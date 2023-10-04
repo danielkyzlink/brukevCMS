@@ -113,6 +113,8 @@ class ArticleController extends AbstractController
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
+                'required' => false,
+                'placeholder' => '-- žádná --',
             ])
             ->add('Author', EntityType::class, [
                 'class' => User::class,
