@@ -57,6 +57,20 @@ class CategoryModel
         $this->em->flush();
     }
 
+    public function changeRanks(int $categoryId, int $categoryIdSoused) {
+        $category = $this->em->getRepository(Category::class)
+            ->find($categoryId);
+        $categorySoused = $this->em->getRepository(Category::class)
+            ->find($categoryIdSoused);
+        $categoryRank = $category->getRankInMenu();
+        $categoryRankSoused = $categorySoused->getRankInMenu();
+
+        $category->setRankInMenu($categoryRankSoused);
+        $categorySoused->setRankInMenu($categoryRank);
+
+        $this->em->flush();
+    }
+
     public function countArticlesInCategory(int $categoryId) {
         $articles = $this->em->getRepository(Article::class)
         ->findBy(

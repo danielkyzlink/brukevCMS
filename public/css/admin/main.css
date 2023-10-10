@@ -81,6 +81,26 @@ table tbody tr.table-remove {
 	color: #777;
 }
 
+tr.sub2 td.name{
+	padding-left: 20px;
+}
+
+tr.sub3 td.name{
+	padding-left: 30px;
+}
+
+tr.sub4 td.name{
+	padding-left: 40px;
+}
+
+tr.sub5 td.name{
+	padding-left: 50px;
+}
+
+tr.sub6 td.name{
+	padding-left: 60px;
+}
+
 /* COLORS */
 .warning-text {
 	color: #d44950;

@@ -7,19 +7,14 @@
         <tr>
             <th scope="col">Název</th>
             <th scope="col">akce</th>
+            <th scope="col">řazení</th>
         </tr>
     </thead>
     <tbody>
-        {% for category in categories %}
-        	<tr>
-        		<td>
-                    {{ category.name }} ({{categoriesCount[category.id]}})
-            	</td>
-            	<td>
-                    <a href="{{ path('saveCategory', { 'categoryId': category.id }) }}">Editovat</a>{% if categoriesCount[category.id] == 0 %} | <a href="{{ path('deleteCategory', { 'categoryId': category.id }) }}">Smazat</a>{% endif %}
-            	</td>
-    		</tr>
-        {% endfor %}
+
+    {% include 'admin/category/recurseCat.html.twig' with {'categories':categories, 'sub':0} %}
+
+
     </tbody>
 </table>
     

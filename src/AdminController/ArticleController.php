@@ -78,6 +78,9 @@ class ArticleController extends AbstractController
         // vytvarim novy Article nebo nacitam stavajici podle $articleId z URL
         if($articleId){
             $article = $articleModel->showArticleById($articleId);
+            if ($article->getState() == 0){
+                throw $this->createNotFoundException('Produkt je v koši.');
+            }
         }else{
             $article = new Article();
         };

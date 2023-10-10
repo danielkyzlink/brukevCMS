@@ -21,14 +21,17 @@ class CategoryController extends AbstractController
     public function listCategories(CategoryModel $categoryModel, ManagerRegistry $doctrine)
     {
         $categories = $doctrine->getRepository(Category::class)
+            ->findBy(['parent' => null], ['rankInMenu' => 'ASC']);
+
+        $allCategories = $doctrine->getRepository(Category::class)
             ->findAll();
-        
+
         if (!$categories) {
             throw $this->createNotFoundException(
                 'No categories found.');
         }
-        
-        foreach ($categories as $category){
+
+        foreach ($allCategories as $category){
             $categoriesCount[$category->getId()] = $categoryModel->countArticlesInCategory($category->getId());
         }
         
@@ -37,6 +40,24 @@ class CategoryController extends AbstractController
             'categories' => $categories,
             'categoriesCount' => $categoriesCount
         ]);
+    }
+
+    /**
+     * @param Category[] $categories
+     * @param Category|null $parentCategory
+     */
+    public function buildTree($categories, $parentCategory = null){
+        $tree = array();
+        foreach ($categories as $category){
+            if($category->getParent() === $parentCategory){
+                $tree[$category->getId()][] = $category;
+                $children = $this->buildTree($categories, $category);
+                if($children){
+                    $tree[$category->getId()]['children'] = $children;
+                }
+            }
+        }
+        return $tree;
     }
     
     
@@ -83,6 +104,13 @@ class CategoryController extends AbstractController
     public function deleteCategory(int $categoryId, CategoryModel $categoryModel)
     {
         $categoryModel->deleteCategory($categoryId);
+        return $this->redirectToRoute('listCategories');
+    }
+
+    #[Route("/admin/category/changeRanks/{categoryId}/{categoryIdSoused}", name: "changeRanks")]
+    public function changeRanks(int $categoryId, int $categoryIdSoused, CategoryModel $categoryModel)
+    {
+        $categoryModel->changeRanks($categoryId, $categoryIdSoused);
         return $this->redirectToRoute('listCategories');
     }
 }
