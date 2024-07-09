@@ -27,5 +27,6 @@
 ###< phpunit/phpunit ###
 
 
-### Eclipse ###
+### Eclipse + phpstorm ###
 /.project
+/.idea

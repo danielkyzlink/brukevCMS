@@ -12,4 +12,4 @@ adminControllers:
 
 kernel:
     resource: ../src/Kernel.php
-    type: annotation
+    type: attribute
